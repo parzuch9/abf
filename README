@@ -1,0 +1,6 @@
+Important programs:
+
+abfSim.cpp - This program predicts the flux at the viewport of the 6-way
+cross over a range of temperatures
+
+abfDataAnalysis.cpp - This program is for analysis of abf experimental data
