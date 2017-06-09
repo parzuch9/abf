@@ -1,0 +1,89 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: abf.aux
+The style file: unsrt.bst
+Database file #1: references.bib
+Warning--entry type for "alcock" isn't style-file defined
+--line 1 of file references.bib
+You're missing a field name---line 21 of file references.bib
+ : 
+ : %  title={Computational Physics Lecture Notes},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 26 of file references.bib
+ : 
+ : % title={D'economie Politique},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 31 of file references.bib
+ : %@article{pareto
+ :                 ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 38 of file references.bib
+ : 
+ : % title={Physics A \textbf{340}},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 44 of file references.bib
+ : 
+ : %  title={Physics A \textbf{415}},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty author and editor in morten
+Warning--empty title in morten
+Warning--empty publisher in morten
+Warning--empty year in morten
+Warning--empty author and editor in pareto
+Warning--empty title in pareto
+Warning--empty publisher in pareto
+Warning--empty year in pareto
+Warning--empty author and editor in patriarca
+Warning--empty title in patriarca
+Warning--empty publisher in patriarca
+Warning--empty year in patriarca
+Warning--empty author and editor in goswami
+Warning--empty title in goswami
+Warning--empty publisher in goswami
+Warning--empty year in goswami
+You've used 7 entries,
+            1791 wiz_defined-function locations,
+            464 strings with 3866 characters,
+and the built_in function-call counts, 893 in all, are:
+= -- 52
+> -- 16
+< -- 0
++ -- 10
+- -- 3
+* -- 58
+:= -- 102
+add.period$ -- 12
+call.type$ -- 7
+change.case$ -- 2
+chr.to.int$ -- 0
+cite$ -- 23
+duplicate$ -- 67
+empty$ -- 128
+format.name$ -- 3
+if$ -- 197
+int.to.chr$ -- 0
+int.to.str$ -- 7
+missing$ -- 7
+newline$ -- 29
+num.names$ -- 3
+pop$ -- 59
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 30
+stack$ -- 0
+substring$ -- 0
+swap$ -- 3
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 16
+while$ -- 3
+width$ -- 8
+write$ -- 47
+(There were 5 error messages)
