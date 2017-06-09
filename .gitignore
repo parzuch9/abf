@@ -1,5 +1,6 @@
 *.txt
 *~
 *.o
+*.png
 #*
 a.out
