@@ -3,6 +3,9 @@
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{wrapfig}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{array}
 \author{Kristen Parzuchowski}
 \begin{document}
 \maketitle
@@ -14,12 +17,12 @@ The Single Atom Microscope is a new detector we are designing in order to measur
 
 A number of things must be known in order to determine the intrinsic brightness of the product atoms in medium:
 \begin{itemize}
-\item \textbf{Number of atoms embedded in medium}
+\item \textbf{Number density of atoms embedded in medium}
 \item Illumination laser intensity and beam profile
 \item Light collection efficiency
 \item Background sources present
 \end{itemize}
-This technical note focuses on calibrating the number of atoms embedded in medium. To do this I perform atomic beam flux measurements and simulations. 
+This technical note focuses on calibrating the number density of atoms embedded in medium. To do this I perform atomic beam fluorescence measurements and simulations. 
 \section{Atomic Structure of Yb}
 Ytterbium is a metallic chemical element in the lanthanide series. The valence shell of yb contains two electrons ([Xe]4f$^{14}$6s$^{2}$).
 \subsection{Isotopic Abundance}
@@ -45,9 +48,14 @@ Isotope & Abundance & Nuclear Spin, I\\
 \hline
 \end{tabular}
 \end{center}
-\subsection{Hyperfine structure}
+\subsection{Hyperfine Structure}
+The hyperfine structure of an atom is a result of the interaction of the nucleon spin with the electron spin. For a given total electron angular momentum, $J$, and a total nuclear spin angular momentum, $I$, a total angular momentum can be calculated:
+\begin{equation}
+\vec{F} = \vec{J} +\vec{I}
+\end{equation}
+For Yb, $J=1$. Only isotopes with nonzero nuclear spin will be split into a hyperfine structure of states. For $^{171}$Yb, $F=1/2,3/2$ and for $^{173}$Yb, $F=3/2,5/2,7/2$.
 \subsection{Frequency Splittings}
-The frequency splittings of Yb have been studied and measured a number of times before, so these values can be found in published papers. In the table below, the values I used from [3] are listed.
+The frequency splittings of Yb have been studied and measured a number of times before, so these values can be found in published papers. In the table below, the values I gathered from [3] are listed.
 \begin{center}
 \begin{tabular}{||c|c||}
 \hline
@@ -65,6 +73,8 @@ Isotope & Shift from $^{174}$Yb (MHz)\\
 \hline
 171 (F=3/2) & 832.436(50) \\
 \hline
+171 (F=1/2) & 1153.696(61) \\
+\hline
 170 & 1192.393(66) \\
 \hline
 168 & 1887.400(50) \\
@@ -75,7 +85,7 @@ Isotope & Shift from $^{174}$Yb (MHz)\\
 \section{Apparatus}
 The apparatus used for these studies is the setup for the Single Atom Microscope. 
 \subsection{Atomic Oven}
-The atomic oven is the source of Yb for our atomic beam. This oven is rated for 450?$^{\circ}$C, which at this operating temperature will well satisfy our requirements for Yb number density in vacuum. From well-known theory [1] of effusive beam sources,  atomic beam flux has the relation: $Flux \propto \frac{P}{\sqrt{m}}$, where $P$ is the vapor pressure of Yb and $m$ is the mass of Yb. The relation will be discussed in further detail in section [?] . The oven design and dimensions are shown in figure 2. 
+The atomic oven is the source of Yb for our atomic beam. This oven is rated for 450$^{\circ}$C, which at this operating temperature will well satisfy our requirements for Yb number density in vacuum. From theory [2] of effusive beam sources,  atomic beam flux has the relation: $Flux \propto \frac{P}{\sqrt{m}}$, where $P$ is the vapor pressure of the atoms and $m$ is the mass of atom. The vapor pressure of Yb and Mg at various temperatures is shown in figure 1. As Mg has a smaller mass and a larger vapor pressure than Yb, we can expect that this atomic oven will also satisfy the number density requirements for Mg. 
 
 
 \begin{wrapfigure}{r}{0.45\textwidth}
@@ -84,16 +94,155 @@ The atomic oven is the source of Yb for our atomic beam. This oven is rated for 
   \caption{Vapor Pressure (Pa) of Yb (Blue) and Mg (Green) as a function of Temperature ($^{\circ}$C). Data is extracted from equations given in [1].}
 \end{wrapfigure}
 
-This oven effuses the atomic beam through a long circular cylindrical tube aperture. If $l$, the length of the cylindrical canal, is much larger than, $r$, the radius of the aperture, the number of atoms emerging from the source per unit time can be calculated by:
+The oven design and dimensions are shown in figure 2. The atomic beam effuses through a long circular cylindrical tube aperture on the oven. If $l$, the length of the cylindrical tube, is much larger than, $r$, the radius of the aperture, the number of atoms emerging from the source per unit time can be predicted theoretically by[2]:
 \begin{equation}
 Q = \frac{2}{3}\frac{r}{l}n\bar{v}A,
 \end{equation}
 where $n$ is the number of atoms per unit volume, $\bar{v}$ is the mean atomic velocity and $A$ is the area of the source slit. In our case, $l = 0.500"$ and $r = 0.0625"$, so our assumption is satisfied fairly well.
 
 \subsection{Atomic Beam}
-The atomic beam exits the oven aperture and traverses through the SAM vacuum system. This vacuum systems consists of a straight path from the oven aperture to the cryostat. The diameter of the vacuum chamber is $\sim 2.3"$, allowing for a maximum atomic beam diameter of that size. I approximate the angle of divergence for the atomic beam through the assumption that $\theta_{max} = \arctan{2r/l}$. The intensity of the atomic beam resembles a cosine distribution. I approximate the atomic beam as a flat distribution across the circular cross section.
+The atomic beam exits the oven aperture and traverses through the SAM vacuum system. This vacuum systems consists of a straight path from the oven aperture to the cryostat. The diameter of the vacuum chamber is $\sim 2.3"$, allowing for a maximum atomic beam diameter of that size. Any atoms that hit the surface of the vacuum chamber will instantly crystallize. I approximate the angle of divergence for the atomic beam through the assumption that $\theta_{max} = \tan^{-1}\frac{2r}{l}$. According to theory[2], the intensity of the atomic beam resembles a cosine distribution. I approximate the spatial distribution of the atomic beam as a flat distribution.
 \subsection{Laser Beam}
-The laser beam used to probe the atomic beam is supplied by a pump laser outputting into a tunable TiSapphire laser cavity and a frequency doubling cavity. The resulting laser can be measured with $10^{-4}$nm precision. The beam profile displays a gaussian intensity distribution which can be measured using a beam profiler. 
+The laser beam used to probe the atomic beam is supplied by a pump laser outputting into a tunable TiSapphire laser cavity and a frequency doubling cavity. The resulting laser can be measured with $10^{-4}$nm precision. The spatial distribution is gaussian in shape, and can be measured using a beam profiler. The spectral distribution is a gaussian shape about a choosen central $\lambda$ ($10^{-4}$nm precision). The shape is relatively narrow when compared to the FWHM of the atom's spectral lineshape. 
+
+\section{Atomic Beam Fluorescence Measurements}
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \includegraphics[scale=0.5]{abf_schematic.png}
+  \vspace*{-3mm}
+  \caption{Schematic of the setup for ABF measurements.}
+\end{wrapfigure}
+Atomic beam flux measurements are performed using the Single Atom Microscope setup, the BLUREI laser in Spinlab, and various optics, optomechanics and electronic devices. This experiment probes the strong Yb $^{1}P_{1} -> ^{1}S_{0}$ transition through laser excitation of the atomic beam. The spontaneous emission of the atoms is measured using an avalanche photodetector set up at $90^{\circ}$ to the excitation laser. Using arguments for detector efficiency, geometry and properties of the atomic and laser beams, a yb number density in vacuum can be extracted from these measurements. The schematic of this setup is shown in figure 2. The signal from the photodetector is amplified and extracted using an optical chopper paired with a lock-in amplifier.
+
+The operating procedures for atomic beam fluorescence measurements can be found at I:/projects/spinlab/SADiCS/Setup\_NSCL/Instructions\_Procedures/170621\_ABF\_Procedures.docx.
+ 
+\subsection{Experimental considerations}
+Many aspects of the experiment must be documented in order to properly determine the Yb number density. It is important to understand the atomic structure of Yb as well as the properties of the vacuum system, yb oven and excitation laser. Ideally, we would know the exact location, size and spatial distribution of the laser and atomic beams. We would also know the geometry of the setup exactly and have completely eliminated all light entering the APD aside from the atoms' fluorescence. Since we can't know these things exactly, I will explain how I've tried to measure these things precisely. 
+
+In order to measure the laser power to a high precision, I measure the laser power immediately before it enters the vacuum system. This should be done as close to the time of the measurement as possible, since the power could drift over time. It is important to have all elements of the experiment in place and running, such as the optical chopper, at the time of the power measurements as these elements reduce the laser power. In order to monitor the stability of this laser power during the experiment, a beam splitter is used to sample a portion of the laser beam and measure its power throughout the experiment. This fraction of the laser's total power is recorded and can be used to adjust the power claimed to be entering the vacuum accordingly. I do not account for the power loss from the windows at the 6-way cross. I also measure the power at various locations along the beam path and at various times as a means to understand how the beam changes over distances and after being directed by different optical elements.
+
+I measure the shape and intensity distribution of the laser using a beamprofiler, BP209. Currently I take a measurement before and after all measurements are done, assuming that these two beam profiles can be averaged. I do not expect the shape and intensity of the beam to change enough to throw off the results of the experiment, but this could be studied further. I also measure the beam profile at multiple locations along the beam path to study how this profile changes. 
+
+In order to measure a small fluorescence signal above what is sometimes a relatively large noise signal, an optical chopper is used. The optical chopper chops the laser beam at a chosen frequency and sends a reference signal to the lock-in amplifier. The lock-in amplifier locks only to signals that are also oscillating at the same frequency. In this case the fluorescence signal measured at the APD should be the only signal oscillating at that chosen frequency. The optical chopper must chop at a frequency much faster than the change in measured signal relative to the average signal in order to prevent the lock-in from having difficulties locking to a signal.  
+
+In order to pick out a sometimes small fluorescence signal, the background light must be mitigated. To lessen the scattering of light, the inside of the 6-way cross is covered in black foil. The APD is attached to a bandpass filter (FF01-400/12-25) which is directly connected to a lens tube. This lens tube comes as close as possible to the vacuum system to prevent lights from the room from entering the APD. The fluorescence emitted from the excited atoms is very nearly isotropic, so the only light I expect to enter the detector comes from fluorescence of Yb atoms.
+
+The geometry of the setup must be carefully noted in order to accurately determine the solid angle of fluorescence measured by the detector. I calculate the light collection efficiency of the detector using:
+\begin{equation}
+\frac{\Omega}{4\pi} = \frac{A_{det}}{4\pi d_{det}^2},
+A_{det} = \pi r_{det}^2,
+\end{equation}
+where $A_{det}$ is the area of the active area of the detector, $r_{det}$ is the radius of the active area of the avalanche photodiode and $d_{det}$ is the distance to the detector from a point within the fiducial volume. This light collection efficiency is valid when $\sqrt{A_{det}} << d_{det}$.
+
+Isotope shifts and hyperfine shifts complicate the spectrum of Yb for this transition. The laser must be scanned over a range of frequencies in order to excite all yb atoms of various isotopes and total angular momentum values. The current parameters I use for frequency scans(fine terascan) are:\\
+\begin{center}
+Scan center:797.8228nm\\
+Scan width:3GHz\\
+Scan rate:10MHz/s.\\
+\end{center}
+This range is chosen in order to include all of the frequency splittings for this transition, but it is a bit overkill.  A new scan range can be determined by calculating the range more precisely or by looking in this paper [3]. I picked this rate in order to get a very detailed scan($\sim 2x10^{-5}nm/s$), this may be adjusted, but I haven't thought in depth about the best scan rate. This laser frequency cannot be electronically readout on a windows 7 computer, but the resonator slow voltage output of the laser can be sent to the DAQ card used for the measurement. A frequency to voltage calibration can be done over the range of frequencies we are interested in. This calibration will be different for other ranges of frequencies. A time varying voltage offset must be determined for each frequency scan, and can be extracted from recorded data. I currently do this by hand.
+
+In order to create a full calibration of the atomic oven, ABF measurements must be taken at a variety of different atomic oven temperatures, starting at $450^{\circ}C$ and ending at a temperature where there are no more atoms flowing in the system. The experimenter should wait until the temperature of the oven has stabilized before taking data at that temperature. Eventually the measurements are no longer possible as the number of atoms in the system is not large enough to create a fluorescence signal strong enough to be seen above the noise floor. Currently, a signal cannot be detected below $\sim$275$^{\circ}$C. The lower temperature limit can vary depending on the pressure of the vacuum system [figure 1].
+
+\subsection{Data Collection}
+The experiment is run using the jabf.vi found in I:/projects/spinlab/SADiCS/Programs/LabVIEW VIs/ABF. Most of the important values in the experiment can be recorded in this program: time, yb oven temperature, lock-in signal, power meter voltage, resonator slow voltage and the standard deviations of these values. The pressure reading in the vacuum system would be useful to add to the vi in order to approximate at which temperature the atoms are no longer vaporized as well as determine if a signal is typically recorded at a given temperature and pressure. This vi will automatically output the necessary data without pushing extra buttons on the vi, but it must run throughout the entirety of a frequency scan if all data is to be gathered. 
+
+Values such as the conversion scale of the Thorlabs power meter and the gain of the APD must be noted by hand. Gentec power meters are done with the Gentec software and beam profile measurements are done with the Thorlabs software.
+
+In order to create a frequency to resonator slow voltage calibration, the resSlowVolt$\_$freq$\_$calib.vi in I:/projects/spinlab/vis$\_$Labview/Laser VIs can be used on the laser computer. This should be ran during a scan over the frequency range of interest. The program outputs time, wavelength, frequency and resonator slow voltage. There is already a calibration for the current range of frequencies, but in the future a scan over a different range of frequencies may be desired.
+
+\subsection{Data Analysis}
+The data analysis program, abf$\_$dataAnalysis.m,  is written in Matlab and can be found at I:/projects/spinlab/SADiCS/Programs/MATLAB. This program determines the flux of Yb atoms at the 6-way cross given the measured data. 
+\begin{equation}
+Flux = \frac{F \cdot v_{rms}}{V\cdot R \cdot \frac{\Omega}{4\pi} }
+\end{equation}
+
+This analysis program will prompt for an input data file produced by the jabf vi, which will correspond to a measurement at a certain temperature. Each row of data in the data file contains the recorded values at a certain time. Since this data was gathered during a laser scan, we can expect that as we progress through the data the frequency will be changing. The starting and stopping resonator slow voltages of the scan are currently hard coded into the program, in order to discard any uninteresting portions of data. These values were found by eye. 
+
+The program also prompts for a laser power data file of .csv type. This file should be produced when measuring the power directly before starting an ABF measurement at a given temperature. Once the laser power data is selected, the program averages the power readings in the data file. The program then uses the voltage readings from the Thorlabs power meter to monitor the power stability and make any adjustments when power fluctuations occur. 
+
+The beam profile data is currently only used to find the major and minor beam widths. The intensity distribution is approximated to be flat. The beam profile major and minor radii are hard coded into the program. I take two beam profile measurements before and after the experiment and average the measured radii. Under the assumption that the intensity distribution is flat as opposed to a gaussian, the laser beam flux is calculated,
+\begin{equation}
+\Phi = \frac{2P_0}{\pi w_1 w_2 h \nu},
+\end{equation}
+where $P_0$ is the peak laser power, $w_1$ \& $w_2$ are the beam radii, $h$ is planck's constant and $\nu$ is the laser frequency.
+
+\begin{wrapfigure}{r}{0.45\textwidth}
+  \includegraphics[scale=0.37]{APD410A2edit.png}
+  \vspace*{-3mm}
+  \caption{APD410A2 Responsivity*M as a function of wavelength. This plot is from the manufacturer, Thorlabs.}
+\end{wrapfigure}
+
+The signal from the lock-in amplifier is read out as an x and y signal. These can be transformed to a total amplified signal:
+\begin{equation}
+R = \sqrt{x^2+y^2}
+\end{equation}
+This amplified signal can be used to extract the number of photons hitting the avalanche photodetector:
+\begin{equation}
+N = \frac{R}{\frac{\mathcal{R}(\lambda)}{50}\cdot M\cdot G \cdot h\nu},
+\end{equation}
+where $\mathcal{R}(\lambda)$ is the detector responsivity, which can be determined by figure 3, $M$ is the gain of the detector (5-50) and $G$ is the amplifier's transimpedance (500kV/A).
+
+The velocity of the atoms in the vacuum system can be described by a Maxwell-Boltzmann distribution:
+\begin{equation}
+f(v) = \sqrt{(\frac{m}{2\pi k T})^3}4\pi v^2 e^{\frac{-mv^2}{2kT}},
+\end{equation}
+where $m$ is the atom's mass, $k$ is Boltzmann's constant, $T$ is the temperature of the atom \& oven and $v$ is the velocity of the atom. We can expect that the spectral line shape will be Doppler broadened, but only due to the portion of the velocity in the direction of the laser beam.
+
+I calculate the atomic cross section  using:
+\begin{equation}
+\sigma_i = \pi r_e c f \mathscr{L}(\nu),
+\mathscr{L}(\nu) = \frac{\frac{\Gamma}{2\pi}}{(\nu-\nu_0)^2+\frac{\Gamma^2}{4}},
+\end{equation}
+where $r_e$ is the classical electron radius, $c$ is the speed of light, $f$ is the oscillator strength for this transition and $\mathscr{L}(\nu)$ is the Lorentzian line shape function at $\nu$ for this transition.
+
+The excitation rate of a given isotope can be calculated by:
+\begin{equation}
+R_i = \int_{0}^{\infty}\sigma_i(\nu) \phi(\nu)d\nu
+\end{equation}
+To good approximation, this reduces to:
+\begin{equation}
+R_i = \frac{2P_0}{\pi w_1 w_2 h \nu}\pi r_e c f \mathscr{L} (\nu_0)
+\end{equation}
+
+The fiducial volume for this experiment is the volume of intersection between the laser beam and the atomic beam. In this volume, the atoms can be excited and emit light into the detector, so it is important to understand which portion of the total atomic beam volume is excited. I approximate the fiducial volume for each possible atomic velocity as the following:
+\begin{equation}
+V_{fid}(v) = \frac{\pi w_1 w_2}{n f(v) \cdot \sum\limits_{i} \sigma_i P_i},
+\end{equation}
+where $f(v)$ is the Maxwell Boltzmann distribution at a velocity $v$, $\sigma_i$ is the cross section for isotope $i$ at a given frequency and $P_i$ is the fraction of isotope $i$ in natural Yb.
+
+The number of atoms in the fiducial volume can be calculated by:
+\begin{equation}
+N_{fid} = \frac{N}{R \cdot \frac{\Omega}{4\pi}},
+\end{equation}
+where $N$ is the number of photons hitting the APD and $R$ is the net excitation rate.
+
+The atomic flux can then be deduced:
+\begin{equation}
+Flux = N_{fid}\cdot \sum\limits_i \frac{v_i}{V_{fid}(v_i)}
+\end{equation}
+
+
+\subsection{Measurements to date}
+\begin{center}
+\begin{table}[!h]
+\begin{tabular}{||p{2cm}|p{8cm}|p{5cm}||}
+\hline
+Date & Experimental Conditions/Improvements & Notes\\
+\hline\hline
+12/05/2016 & Excitation at single frequency 797.8224nm, proper adjustments of lock-in sensitivity used, black foil in chamber & $\sim345^{\circ}C-\sim225^{\circ}C$. Noise floor found at $\sim245^{\circ}C$. If data is to be used, better data analysis is required.\\
+\hline
+05/15/2017 & Laser scanning with center: 797.8228nm, width: 3GHz, rate: 10MHz/s & $\sim345^{\circ}C-\sim295^{\circ}C$\\
+\hline
+06/15/2017 & Laser scanning with center: 797.8228nm, width: 3GHz, rate: 10MHz/s & $\sim305^{\circ}C-\sim275^{\circ}C$. Noise floor found at $\sim275^{\circ}C$. Check that standard deviations were recorded.\\
+\hline 
+07/26/2016 & Excitation at single frequency (555.8023nm) to excite $^{3}P_{1}$-$ ^{1}S_{0}$ transition (GRUVY, BLUREI not working), $\sim50mW$ of light, fiber coupled, lockin sensitivity not adjusted at proper intervals & $\sim445^{\circ}C-\sim103^{\circ}C$ (well past noise floor), Data recorded by hand, temperature was not stable during measurements\\
+\hline
+10/06/2016 & Excitation at single frequency (797.8228nm) & $\sim328^{\circ}C-\sim70^{\circ}C$ (well past noise floor), resonance found by hand, all measurements performed at one lockin sensitivity, beamprofile diameters recorded by hand\\
+\hline
+\end{tabular}
+\end{table}
+\end{center}
+
 
 \section{Atomic Beam Flux Simulation}
 The atomic beam flux simulation uses equation (1) to calculate the flux at a chosen location along the atomic beam path,
@@ -102,55 +251,15 @@ Flux = \frac{Q}{\pi R^{2}},
 \end{equation}
 where R is the radius of the atomic beam at the chosen location. For our purposes, it is most useful to simulate the flux at the position where ABF measurements occur, the 6-way cross. 
 
+The simulation is most useful if it predicts the signal measured by the APD during an atomic beam flux measurement, but this has yet to be implemented. To do this, theoretical considerations of excitation rate, geometry arguments and detector efficiency must be considered. The predicted signal can then be compared to measured values for quick comparison or for simulating the effect of future manipulations to the experiment.
 
-\section{Atomic Beam Flux Measurements}
-\begin{wrapfigure}{r}{0.5\textwidth}
-  \includegraphics[scale=0.5]{ABF_setup.png}
-  \vspace*{-3mm}
-  \caption{Schematic of the setup for ABF measurements.}
-\end{wrapfigure}
-Atomic beam flux measurements are performed using the Single Atom Microscope setup, the BLUREI laser in Spinlab, and various optics, optomechanics and electronic devices. This experiment probes the Yb $^{1}P_{1} -> ^{1}S_{0}$ transition through laser excitation of the atomic beam. The de-excitation of the atoms is measured using an avalanche photodetector. The schematic of this setup is shown in figure 2. The signal from the photodetector is amplified and extracted using an optical chopper paired with a lock-in amplifier. 
-\subsection{Experimental considerations}
-The number that we hope to extract from this experiment is the number of atoms per unit area per unit time, or the atomic flux. Many aspects of the experiment must be documented in order to properly do this. It is important to understand the properties of the excitation laser. Ideally, we would know the exact power, size and intensity distribution of the laser beam when it intersects with the atomic beam. 
 
-In order to measure the power to the highest precision, I measure the laser power by interrupting the beam right before it enters the vacuum system. This should be done as close to the time of the measurement as possible, since the power could drift slightly over time. It is important to have all elements of the experiment in place and running, such as the optical chopper, at the time of the power measurements as these elements could reduce the laser power. In order to monitor the stability of this laser power during the experiment, a beam splitter is used to sample the power throughout the experiment. This fraction of the laser's total power is recorded and can be used to adjust the initial power accordingly.  
-
-I measure the shape and intensity distribution of the laser using BP2i83yfkdsaj. Currently I take a measurement before and after all measurements are done, assuming that these two beam profiles can be averaged as I do not expect the shape and intensity of the beam to change dramatically in a way that greatly effects the results of the experiment.
-
-The optical chopper is used to chop the laser beam at a frequency faster much faster than the change in measured signal relative to the average signal. 1kHz satisfies this condition and has been used in the previous measurements. The optical chopper sends a reference signal to the lock-in amplifier so that it knows what frequency the signal of interest will occur at. 
-
-The background light is mitigated by a number of things. The inside of the 6-way cross is covered in black foil to lessen the scattering of light. The APD is attached to a bandpass filter (400/12nm) which is directly connected to a lens tube. This lens tube comes as close as possible to the vacuum system to prevent lights from the room entering the APD. The light emitted from the atoms is very nearly isotropic, so the only light I expect to enter the detector comes from the de-excitation of the atoms. 
-
-The laser must be scanned over a range of frequencies in order to communicate with all natural yb atoms of various isotopes and total angular momentum values. This laser frequency cannot be electronically readout on a windows 7 computer, but the resonator slow voltage output of the laser can be sent to the DAQ card used for the measurement. A frequency to voltage calibration can be done over the range of frequencies we are interested in, but this calibration will be different for other ranges of frequencies. A time varying voltage offset must be determined for each frequency scan, and can be extracted from recorded data. 
-
-In order to create a full calibration of the atomic oven, ABF measurements must be taken at a variety of different atomic oven temperatures. The experimenter should wait until the temperature of the oven has stabilized before taking data at that temperature. Eventually the measurements are no longer possible as the number of atoms in the system is not large enough to create a de-excitation signal strong enough to be seen above the noise floor. 
-
-\subsection{Data Collection}
-The experiment is run using the jabf.vi found in I:/projects/spinlab/SADiCS/Programs/LabVIEW VIs/ABF. Most of the important values in the experiment can be recorded in this program: time, yb oven temperature, lock-in signal, power meter voltage, resonator slow voltage and the standard deviations of these values. This vi will automatically output the necessary data without pushing extra buttons on the vi, but it must run throughout the entirety of a frequency scan. 
-
-In order to create a frequency to resonator slow voltage conversion, the resSlowVolt$\_$freq$\_$calib.vi in I:/projects/spinlab/vis$\_$Labview/Laser VIs should be used on the laser computer. This should be ran during a scan over the frequency range of interest. The program outputs time, wavelength, frequency and resonator slow voltage.  
-
-\subsection{Data Analysis}
-The data analysis program, abf$\_$dataAnalysis.m,  is written in Matlab and can be found at I:/projects/spinlab/SADiCS/Programs/MATLAB. This analysis program will prompt for an input data file produced by the jabf vi, which will correspond to a measurement at a certain temperature. Each row of data in the data file contains the recorded values at a certain time. Since this data was gathered during a laser scan, we can expect that as we progress through the data the frequency will be changing. The starting and stopping resonator slow voltages of the scan are currently hard coded into the program, in order to discard any uninteresting portions of data. These values were found by eye. 
-
-The program also prompts for a laser power data file of .csv type. This file should be produced when measuring the power directly before starting an ABF measurement at a given temperature. Once the laser power data is selected, the program averages the power readings in the data file. The program then uses the voltage readings from the Thorlabs power meter to monitor the power stability and make any adjustments when power fluctuations occur. 
-
-The beam profile major and minor radii are hard coded into the program. Under the assumption that the intensity distribution is flat as opposed to a gaussian, the laser beam flux is calculated,
-\begin{equation}
-\Phi = \frac{2P}{\pi w_1 w_2 h \nu},
-\end{equation}
-where $P$ is the laser power, $w_1$ \& $w_2$ are the beam radii, $h$ is planck's constant and $\nu$ is the laser frequency.
-
-The fiducial volume for this experiment is the volume of intersection between the laser beam and the atomic beam. In this volume, the atoms can be excited and emit light into the detector, so it is important to understand which portion of the total volume is excited. I approximate the fiducial volume for each possible atomic velocity as the following:
-\begin{equation}
-V_{fid} = \frac{\pi w_1 w_2}{n f(v) \cdot \sum\limits_{i} \sigma_i P_i},
-\end{equation}
-where $f(v)$ is the Maxwell Boltzmann distribution at a velocity $v$, $\sigma_i$ is the cross section for isotope $i$ at a given frequency and $P_i$ is the fraction of isotope $i$ in natural Yb.
-\section{Assumptions}
+\section{Uncertainty}
+In the table below, confidence factors tell you the factor by which the calculated number could deviate from the actual value.
 \begin{center}
 \begin{tabular}{||c|c|c||}
 \hline
-Assumption & Confidence Factor & Improvement's effect on flux\\
+Experimental factor & Confidence Factor & Improvement's effect on flux\\
 \hline\hline
 Flat distribution of atoms in beam & 4 & +\\
 \hline
