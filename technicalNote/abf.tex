@@ -105,7 +105,15 @@ where $n$ is the number of atoms per unit volume, $\bar{v}$ is the mean atomic v
 \subsection{Atomic Beam}
 The atomic beam exits the oven aperture and traverses through the SAM vacuum system. This vacuum systems consists of a straight path from the oven aperture to the cryostat. The diameter of the vacuum chamber is $\sim 2.3"$, allowing for a maximum atomic beam diameter of that size. Any atoms that hit the surface of the vacuum chamber will instantly crystallize. I approximate the angle of divergence for the atomic beam through the assumption that $\theta_{max} = \tan^{-1}\frac{2r}{l}$. According to theory[2], the intensity of the atomic beam resembles a cosine distribution. I approximate the spatial distribution of the atomic beam as a flat distribution.
 \subsection{Laser Beam}
-The laser beam used to probe the atomic beam is supplied by a pump laser outputting into a tunable TiSapphire laser cavity and a frequency doubling cavity. The resulting laser can be measured with $10^{-4}$nm precision. The spatial distribution is gaussian in shape, and can be measured using a beam profiler. The spectral distribution is a gaussian shape about a choosen central $\lambda$ ($10^{-4}$nm precision). The shape is relatively narrow when compared to the FWHM of the atom's spectral lineshape. 
+The laser beam used to probe the atomic beam is supplied by a pump laser outputting into a tunable TiSapphire laser cavity and a frequency doubling cavity. The resulting laser can be measured with $10^{-4}$nm precision. The spatial distribution of photons is Gaussian in shape, and can be measured using a beam profiler. The spectral distribution is a gaussian shape about a chosen central $\lambda$ ($10^{-4}$nm precision). The shape is relatively narrow when compared to the FWHM of the atom's spectral lineshape. The number of photons per unit time per unit area as a function of laser frequency $\nu$, radial distance from the beam's center $r$, distance along the central beam axis $z$ and time $t$, can be written:
+
+\begin{equation}
+\Phi(\nu,r,z,t) = \frac{2P_0}{\pi w(z)^2 h \nu_0} Exp[\frac{-2r^2}{w(z)^2}]\frac{2\sqrt{log(2)}/\pi}{FWHM}Exp[-4log{2}\frac{(\nu-\nu_0)^2}{FWHM^2}],
+\end{equation}
+\begin{equation}
+w(z) = w_0\sqrt{1+\psi_0^2(\frac{z-z_0}{w_0})^2}
+\end{equation}
+where $P_0$ is the peak laser power, $w(z)$ is the beam radius as a function of distance along the central beam axis, $\nu_0$ is the central laser frequency, $FWHM$ is the full width at half maximum of the laser's spectral distribution, $w_0$ is the laser beam width, $\psi_0 = \lambda/(\pi w_0)$ and $z_0$ is the position of the beam waist along the central beam axis.
 
 \section{Atomic Beam Fluorescence Measurements}
 \begin{wrapfigure}{r}{0.5\textwidth}
@@ -118,7 +126,7 @@ Atomic beam flux measurements are performed using the Single Atom Microscope set
 The operating procedures for atomic beam fluorescence measurements can be found at I:/projects/spinlab/SADiCS/Setup\_NSCL/Instructions\_Procedures/170621\_ABF\_Procedures.docx.
  
 \subsection{Experimental considerations}
-Many aspects of the experiment must be documented in order to properly determine the Yb number density. It is important to understand the atomic structure of Yb as well as the properties of the vacuum system, yb oven and excitation laser. Ideally, we would know the exact location, size and spatial distribution of the laser and atomic beams. We would also know the geometry of the setup exactly and have completely eliminated all light entering the APD aside from the atoms' fluorescence. Since we can't know these things exactly, I will explain how I've tried to measure these things precisely. 
+Many aspects of the experiment must be studied and documented in order to properly determine the Yb number density. It is important to understand the atomic structure of Yb as well as the properties of the vacuum system, yb oven and excitation laser. Ideally, we would know the exact location, size and spatial distribution of the laser and atomic beams. We would also know the geometry of the setup exactly and have completely eliminated all light entering the APD aside from the atoms' fluorescence. Since we can't know these things exactly, I will explain how I've tried to measure these things precisely. 
 
 In order to measure the laser power to a high precision, I measure the laser power immediately before it enters the vacuum system. This should be done as close to the time of the measurement as possible, since the power could drift over time. It is important to have all elements of the experiment in place and running, such as the optical chopper, at the time of the power measurements as these elements reduce the laser power. In order to monitor the stability of this laser power during the experiment, a beam splitter is used to sample a portion of the laser beam and measure its power throughout the experiment. This fraction of the laser's total power is recorded and can be used to adjust the power claimed to be entering the vacuum accordingly. I do not account for the power loss from the windows at the 6-way cross. I also measure the power at various locations along the beam path and at various times as a means to understand how the beam changes over distances and after being directed by different optical elements.
 
@@ -153,7 +161,7 @@ Values such as the conversion scale of the Thorlabs power meter and the gain of 
 In order to create a frequency to resonator slow voltage calibration, the resSlowVolt$\_$freq$\_$calib.vi in I:/projects/spinlab/vis$\_$Labview/Laser VIs can be used on the laser computer. This should be ran during a scan over the frequency range of interest. The program outputs time, wavelength, frequency and resonator slow voltage. There is already a calibration for the current range of frequencies, but in the future a scan over a different range of frequencies may be desired.
 
 \subsection{Data Analysis}
-The data analysis program, abf$\_$dataAnalysis.m,  is written in Matlab and can be found at I:/projects/spinlab/SADiCS/Programs/MATLAB. This program determines the flux of Yb atoms at the 6-way cross given the measured data. 
+The data analysis program, abf$\_$dataAnalysis.m,  is written in Matlab and can be found at I:/projects/spinlab/SADiCS/Programs/MATLAB. This program determines the flux of Yb atoms at the 6-way cross given the measured data:
 \begin{equation}
 Flux = \frac{F \cdot v_{rms}}{V_{fid}\cdot R \cdot \frac{\Omega}{4\pi} },
 \end{equation}
@@ -163,7 +171,7 @@ This analysis program will prompt for an input data file produced by the jabf vi
 
 The program also prompts for a laser power data file of .csv type. This file should be saved when measuring the power directly before starting a scanning measurement. Once the laser power data is selected, the program averages the power readings in the data file and determines the peak laser power. The program then uses the voltage readings from the Thorlabs power meter to monitor the power stability and make any adjustments when power fluctuations occur. 
 
-The beam profile data is currently only used to find the major and minor beam radii. I take two beam profile measurements before and after the experiment and average the measured radii.  The beam profile major and minor radii are hard coded into the program. The intensity distribution is approximated as a flat distribution as opposed to a Gaussian distribution. Under the approximation, the laser beam photon flux becomes:
+The beam profile data is currently only used to find the major and minor beam radii. I take two beam profile measurements before and after the experiment and average the measured radii.  The laser beam is approximated as a circle with a radius that is the average of the two radii of the ellipse. The radius is hard coded into the program. The intensity distribution is approximated as a uniform distribution as opposed to a Gaussian distribution. Under the approximation, the laser beam photon flux becomes:
 \begin{equation}
 \Phi = \frac{2P_0}{\pi w^2 h \nu},
 \end{equation}
@@ -262,16 +270,34 @@ R_i =\frac{2P_0}{\pi w^2 h \nu_0} Exp[-\frac{2r^2}{w^2}] \pi r_e c f \mathscr{L}
 \section{Uncertainty}
 In the table below, uncertainty of experimental quantities are stated.
 \begin{center}
-\begin{tabular}{||c|c|c||}
+\begin{tabular}{||c|c|p{8cm}||}
 \hline
 Experimental factor & Uncertainty & Considerations\\
 \hline\hline
- Laser Power &  & \\
+ Laser Power &  & Accuracy and precision of power meter, loss of light through window\\
 \hline
- Wavelength &  & \\
+ Wavelength &  & Accuracy and precision of wave meter and laser, uncertainty in resonator slow voltage fit\\
 \hline
- Detector &  &  \\
+ Detector Efficiency &  & Accuracy and precision of manufacturer's conversion efficiency\\
 \hline 
+ Voltage readings from lock-in &  & \\
+\hline
+ Light collection efficiency &  & Accuracy and precision of approximation for efficiency, assumption that fluorescence is isotropic, loss of light through window\\
+\hline
+ Fiducial Volume &  & Assumption of divergence angle of atomic beam\\
+\hline
+ Origin of photons &  & Assumption that fluorescence is the only light hitting the detector\\
+\hline
+ Velocity of atoms &  & Accuracy and precision of temperature sensor, assumption that all atoms at temperature of temperature sensor \\
+\hline
+ Laser beam spatial distribution &  & Assumption that spatial distribution is uniform throughout circular area \\
+\hline
+ Laser beam spectral distribution &  & Assumption that distribution is a delta function at central frequency \\
+\hline
+ Atomic beam spatial distribution &  & Assumption that distribution is uniform\\
+ \hline
+ Atom's lineshape for transition &  & Accuracy and precision of measured lineshape \\
+ \hline
 \end{tabular}
 \end{center}
 \nocite{*}
