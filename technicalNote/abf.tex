@@ -6,6 +6,8 @@
 \usepackage{mathrsfs}
 \usepackage{amssymb}
 \usepackage{array}
+\usepackage{geometry}
+\geometry{margin=1in}
 \author{Kristen Parzuchowski}
 \begin{document}
 \maketitle
@@ -153,14 +155,15 @@ In order to create a frequency to resonator slow voltage calibration, the resSlo
 \subsection{Data Analysis}
 The data analysis program, abf$\_$dataAnalysis.m,  is written in Matlab and can be found at I:/projects/spinlab/SADiCS/Programs/MATLAB. This program determines the flux of Yb atoms at the 6-way cross given the measured data. 
 \begin{equation}
-Flux = \frac{F \cdot v_{rms}}{V\cdot R \cdot \frac{\Omega}{4\pi} }
+Flux = \frac{F \cdot v_{rms}}{V_{fid}\cdot R \cdot \frac{\Omega}{4\pi} },
 \end{equation}
+where $F$ is the photon detection rate, $v_{rms}$ is the rms velocity, $V_{fid}$ is the fiducial volume, $R$ is the excitation rate per atom and $\frac{\Omega}{4 \pi}$ is the light collection efficiency of the detector. 
 
-This analysis program will prompt for an input data file produced by the jabf vi, which will correspond to a measurement at a certain temperature. Each row of data in the data file contains the recorded values at a certain time. Since this data was gathered during a laser scan, we can expect that as we progress through the data the frequency will be changing. The starting and stopping resonator slow voltages of the scan are currently hard coded into the program, in order to discard any uninteresting portions of data. These values were found by eye. 
+This analysis program will prompt for an input data file produced by the jabf vi, which will correspond to a measurement at a certain temperature. Each row of data in the data file contains the recorded values at a certain time. Since this data was gathered during a laser scan, we can expect that as we progress through the data the frequency will be changing. The starting and stopping resonator slow voltages of the scan are currently hard coded into the program, in order to pick the data from the scan. These values were found by hand. 
 
-The program also prompts for a laser power data file of .csv type. This file should be produced when measuring the power directly before starting an ABF measurement at a given temperature. Once the laser power data is selected, the program averages the power readings in the data file. The program then uses the voltage readings from the Thorlabs power meter to monitor the power stability and make any adjustments when power fluctuations occur. 
+The program also prompts for a laser power data file of .csv type. This file should be saved when measuring the power directly before starting a scanning measurement. Once the laser power data is selected, the program averages the power readings in the data file and determines the peak laser power. The program then uses the voltage readings from the Thorlabs power meter to monitor the power stability and make any adjustments when power fluctuations occur. 
 
-The beam profile data is currently only used to find the major and minor beam widths. The intensity distribution is approximated to be flat. The beam profile major and minor radii are hard coded into the program. I take two beam profile measurements before and after the experiment and average the measured radii. Under the assumption that the intensity distribution is flat as opposed to a gaussian, the laser beam flux is calculated,
+The beam profile data is currently only used to find the major and minor beam radii. I take two beam profile measurements before and after the experiment and average the measured radii.  The beam profile major and minor radii are hard coded into the program. The intensity distribution is approximated as a flat distribution as opposed to a Gaussian distribution. Under the approximation, the laser beam photon flux becomes:
 \begin{equation}
 \Phi = \frac{2P_0}{\pi w_1 w_2 h \nu},
 \end{equation}
@@ -169,7 +172,7 @@ where $P_0$ is the peak laser power, $w_1$ \& $w_2$ are the beam radii, $h$ is p
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[scale=0.37]{APD410A2edit.png}
   \vspace*{-3mm}
-  \caption{APD410A2 Responsivity*M as a function of wavelength. This plot is from the manufacturer, Thorlabs.}
+  \caption{APD410A2 Responsivity*M (A/W) as a function of wavelength. This plot is from the manufacturer, Thorlabs.}
 \end{wrapfigure}
 
 The signal from the lock-in amplifier is read out as an x and y signal. These can be transformed to a total amplified signal:
@@ -195,15 +198,6 @@ I calculate the atomic cross section  using:
 \end{equation}
 where $r_e$ is the classical electron radius, $c$ is the speed of light, $f$ is the oscillator strength for this transition and $\mathscr{L}(\nu)$ is the Lorentzian line shape function at $\nu$ for this transition.
 
-The excitation rate of a given isotope can be calculated by:
-\begin{equation}
-R_i = \int_{0}^{\infty}\sigma_i(\nu) \phi(\nu)d\nu
-\end{equation}
-To good approximation, this reduces to:
-\begin{equation}
-R_i = \frac{2P_0}{\pi w_1 w_2 h \nu}\pi r_e c f \mathscr{L} (\nu_0)
-\end{equation}
-
 The fiducial volume for this experiment is the volume of intersection between the laser beam and the atomic beam. In this volume, the atoms can be excited and emit light into the detector, so it is important to understand which portion of the total atomic beam volume is excited. I approximate the fiducial volume for each possible atomic velocity as the following:
 \begin{equation}
 V_{fid}(v) = \frac{\pi w_1 w_2}{n f(v) \cdot \sum\limits_{i} \sigma_i P_i},
@@ -227,17 +221,17 @@ Flux = N_{fid}\cdot \sum\limits_i \frac{v_i}{V_{fid}(v_i)}
 \begin{table}[!h]
 \begin{tabular}{||p{2cm}|p{8cm}|p{5cm}||}
 \hline
-Date & Experimental Conditions/Improvements & Notes\\
+Date & Experiment Summary & Notes\\
 \hline\hline
-12/05/2016 & Excitation at single frequency 797.8224nm, proper adjustments of lock-in sensitivity used, black foil in chamber & $\sim345^{\circ}C-\sim225^{\circ}C$. Noise floor found at $\sim245^{\circ}C$. If data is to be used, better data analysis is required.\\
+06/15/2017 & Laser scan center: 797.8228nm, width: 3GHz, rate: 10MHz/s. $\sim305^{\circ}C-\sim275^{\circ}C$. &  Noise floor found at $\sim275^{\circ}C$. Check that standard deviations were recorded.\\
 \hline
-05/15/2017 & Laser scanning with center: 797.8228nm, width: 3GHz, rate: 10MHz/s & $\sim345^{\circ}C-\sim295^{\circ}C$\\
-\hline
-06/15/2017 & Laser scanning with center: 797.8228nm, width: 3GHz, rate: 10MHz/s & $\sim305^{\circ}C-\sim275^{\circ}C$. Noise floor found at $\sim275^{\circ}C$. Check that standard deviations were recorded.\\
+05/15/2017 & Laser scan center: 797.8228nm, width: 3GHz, rate: 10MHz/s. $\sim345^{\circ}C-\sim295^{\circ}C$ & \\
 \hline 
-07/26/2016 & Excitation at single frequency (555.8023nm) to excite $^{3}P_{1}$-$ ^{1}S_{0}$ transition (GRUVY, BLUREI not working), $\sim50mW$ of light, fiber coupled, lockin sensitivity not adjusted at proper intervals & $\sim445^{\circ}C-\sim103^{\circ}C$ (well past noise floor), Data recorded by hand, temperature was not stable during measurements\\
+12/05/2016 & Excitation at single frequency (797.8224nm), black foil in chamber. $\sim345^{\circ}C-\sim225^{\circ}C$. &  Lower temp limit found at $\sim245^{\circ}C$. \\
 \hline
-10/06/2016 & Excitation at single frequency (797.8228nm) & $\sim328^{\circ}C-\sim70^{\circ}C$ (well past noise floor), resonance found by hand, all measurements performed at one lockin sensitivity, beamprofile diameters recorded by hand\\
+10/06/2016 & Excitation at single frequency (797.8228nm), $\sim328^{\circ}C-\sim70^{\circ}C$ (well below lower temp limit) & Resonance found by hand, all measurements performed at one lock-in sensitivity, laser beam diameters recorded by hand\\
+\hline
+07/26/2016 & Excitation at single frequency (555.8023nm) to excite $^{3}P_{1}$-$ ^{1}S_{0}$ transition (GRUVY, BLUREI not working), $\sim50mW$ of light, fiber coupled, lockin sensitivity not adjusted at proper intervals. $\sim445^{\circ}C-\sim103^{\circ}C$ (well below lower temp limit). & Data recorded by hand, temperature was not stable during measurements, no beam profile measurements\\
 \hline
 \end{tabular}
 \end{table}
@@ -245,27 +239,38 @@ Date & Experimental Conditions/Improvements & Notes\\
 
 
 \section{Atomic Beam Flux Simulation}
-The atomic beam flux simulation uses equation (1) to calculate the flux at a chosen location along the atomic beam path,
+The atomic beam flux simulation calculates the flux at a chosen location along the atomic beam path,
 \begin{equation}
 Flux = \frac{Q}{\pi R^{2}},
 \end{equation}
-where R is the radius of the atomic beam at the chosen location. For our purposes, it is most useful to simulate the flux at the position where ABF measurements occur, the 6-way cross. 
+where Q is given in equation 1 and R is the radius of the atomic beam at the chosen location. For our purposes, it is most useful to simulate the flux at the position where ABF measurements occur, the 6-way cross. 
 
-The simulation is most useful if it predicts the signal measured by the APD during an atomic beam flux measurement, but this has yet to be implemented. To do this, theoretical considerations of excitation rate, geometry arguments and detector efficiency must be considered. The predicted signal can then be compared to measured values for quick comparison or for simulating the effect of future manipulations to the experiment.
+The simulation is most useful if it predicts the signal measured by the APD during an atomic beam flux measurement, but this has yet to be implemented. The predicted signal can be used for quick comparisons during measurements. It is also useful for simulating a desired change to the experiment. 
+
+To expand upon the simulation, the excitation rate for yb atoms of various isotopes and total angular momentum values must be well understand theoretically. The frequency spacings and isotopic abundances listed above can be used to predict the location of a resonant frequency. The spectal shapes can be determined by considering the convolution of the natural Lorentzian lineshapes with Doppler broadened lineshapes. I am unsure if other broadening factors play a role in the final lineshape. The excitation rate of a given isotope can be calculated by:
+\begin{equation}
+R_i = \int_{0}^{\infty}\sigma_i(\nu) \phi(\nu)d\nu = \frac{P_0}{h \nu} \frac{2}{\pi w^2} Exp[-\frac{2r^2}{w^2}]\pi r_e c f \int_{0}^{\infty} \mathscr{L}(\nu) \mathscr{G}(\nu),
+\end{equation}
+When the FWHM of the spectral distribution of the atom's cross section is much greater than the FWHM of the laser's spectral distribution, the excitation rate reduces to:
+\begin{equation}
+R_i =\frac{2P_0}{\pi w_1 w_2 h \nu} Exp[-\frac{2r^2}{w^2}] \pi r_e c f \mathscr{L} (\nu_0),
+\end{equation}
+where $\nu_0$ is the central frequency of the laser.
+
 
 
 \section{Uncertainty}
-In the table below, confidence factors tell you the factor by which the calculated number could deviate from the actual value.
+In the table below, uncertainty of experimental quantities are stated.
 \begin{center}
 \begin{tabular}{||c|c|c||}
 \hline
-Experimental factor & Confidence Factor & Improvement's effect on flux\\
+Experimental factor & Uncertainty & Considerations\\
 \hline\hline
-Flat distribution of atoms in beam & 4 & +\\
+ &  & \\
 \hline
-Flat distribution of laser power & 4 & -\\
+ &  & \\
 \hline
-Fiducial volume & 100 & + \\
+ &  &  \\
 \hline 
 \end{tabular}
 \end{center}
