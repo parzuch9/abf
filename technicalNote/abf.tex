@@ -1,5 +1,5 @@
 \documentclass[12pt, a4paper]{article}
-\title{A Technical Note on Atomic Beam Flux Measurements for the Design of a Single Atom Microscope}
+\title{A Technical Note on Atomic Beam Fluorescence Measurements for the Design of a Single Atom Microscope}
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{wrapfig}
@@ -165,9 +165,9 @@ The program also prompts for a laser power data file of .csv type. This file sho
 
 The beam profile data is currently only used to find the major and minor beam radii. I take two beam profile measurements before and after the experiment and average the measured radii.  The beam profile major and minor radii are hard coded into the program. The intensity distribution is approximated as a flat distribution as opposed to a Gaussian distribution. Under the approximation, the laser beam photon flux becomes:
 \begin{equation}
-\Phi = \frac{2P_0}{\pi w_1 w_2 h \nu},
+\Phi = \frac{2P_0}{\pi w^2 h \nu},
 \end{equation}
-where $P_0$ is the peak laser power, $w_1$ \& $w_2$ are the beam radii, $h$ is planck's constant and $\nu$ is the laser frequency.
+where $P_0$ is the peak laser power, $w$ is the beam radius, $h$ is planck's constant and $\nu$ is the laser frequency.
 
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[scale=0.37]{APD410A2edit.png}
@@ -200,7 +200,7 @@ where $r_e$ is the classical electron radius, $c$ is the speed of light, $f$ is 
 
 The fiducial volume for this experiment is the volume of intersection between the laser beam and the atomic beam. In this volume, the atoms can be excited and emit light into the detector, so it is important to understand which portion of the total atomic beam volume is excited. I approximate the fiducial volume for each possible atomic velocity as the following:
 \begin{equation}
-V_{fid}(v) = \frac{\pi w_1 w_2}{n f(v) \cdot \sum\limits_{i} \sigma_i P_i},
+V_{fid}(v) = \frac{\pi w^2}{n f(v) \cdot \sum\limits_{i} \sigma_i P_i},
 \end{equation}
 where $f(v)$ is the Maxwell Boltzmann distribution at a velocity $v$, $\sigma_i$ is the cross section for isotope $i$ at a given frequency and $P_i$ is the fraction of isotope $i$ in natural Yb.
 
@@ -249,13 +249,13 @@ The simulation is most useful if it predicts the signal measured by the APD duri
 
 To expand upon the simulation, the excitation rate for yb atoms of various isotopes and total angular momentum values must be well understand theoretically. The frequency spacings and isotopic abundances listed above can be used to predict the location of a resonant frequency. The spectal shapes can be determined by considering the convolution of the natural Lorentzian lineshapes with Doppler broadened lineshapes. I am unsure if other broadening factors play a role in the final lineshape. The excitation rate of a given isotope can be calculated by:
 \begin{equation}
-R_i = \int_{0}^{\infty}\sigma_i(\nu) \phi(\nu)d\nu = \frac{P_0}{h \nu} \frac{2}{\pi w^2} Exp[-\frac{2r^2}{w^2}]\pi r_e c f \int_{0}^{\infty} \mathscr{L}(\nu) \mathscr{G}(\nu),
+R_i = \int_{0}^{\infty}\sigma_i(\nu) \phi(\nu)d\nu = \frac{P_0}{h \nu_0} \frac{2}{\pi w^2} Exp[-\frac{2r^2}{w^2}]\pi r_e c f \int_{0}^{\infty} \mathscr{L}(\nu) \mathscr{G}(\nu),
 \end{equation}
-When the FWHM of the spectral distribution of the atom's cross section is much greater than the FWHM of the laser's spectral distribution, the excitation rate reduces to:
+where $\nu_0$ is the central frequency of the laser. When the FWHM of the spectral distribution of the atom's cross section is much greater than the FWHM of the laser's spectral distribution, the excitation rate reduces to:
 \begin{equation}
-R_i =\frac{2P_0}{\pi w_1 w_2 h \nu} Exp[-\frac{2r^2}{w^2}] \pi r_e c f \mathscr{L} (\nu_0),
+R_i =\frac{2P_0}{\pi w^2 h \nu_0} Exp[-\frac{2r^2}{w^2}] \pi r_e c f \mathscr{L} (\nu_0),
 \end{equation}
-where $\nu_0$ is the central frequency of the laser.
+
 
 
 
@@ -266,11 +266,11 @@ In the table below, uncertainty of experimental quantities are stated.
 \hline
 Experimental factor & Uncertainty & Considerations\\
 \hline\hline
- &  & \\
+ Laser Power &  & \\
 \hline
- &  & \\
+ Wavelength &  & \\
 \hline
- &  &  \\
+ Detector &  &  \\
 \hline 
 \end{tabular}
 \end{center}
