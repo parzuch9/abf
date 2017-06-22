@@ -103,7 +103,20 @@ Q = \frac{2}{3}\frac{r}{l}n\bar{v}A,
 where $n$ is the number of atoms per unit volume, $\bar{v}$ is the mean atomic velocity and $A$ is the area of the source slit. In our case, $l = 0.500"$ and $r = 0.0625"$, so our assumption is satisfied fairly well.
 
 \subsection{Atomic Beam}
-The atomic beam exits the oven aperture and traverses through the SAM vacuum system. This vacuum systems consists of a straight path from the oven aperture to the cryostat. The diameter of the vacuum chamber is $\sim 2.3"$, allowing for a maximum atomic beam diameter of that size. Any atoms that hit the surface of the vacuum chamber will instantly crystallize. I approximate the angle of divergence for the atomic beam through the assumption that $\theta_{max} = \tan^{-1}\frac{2r}{l}$. According to theory[2], the intensity of the atomic beam resembles a cosine distribution. I approximate the spatial distribution of the atomic beam as a flat distribution.
+The atomic beam exits the oven aperture and traverses through the SAM vacuum system. This vacuum systems consists of a straight path from the oven aperture to the cryostat. The diameter of the vacuum chamber is $\sim 2.3"$, allowing for a maximum atomic beam diameter of that size. Any atoms that hit the surface of the vacuum chamber will instantly crystallize. I approximate the angle of divergence for the atomic beam through the assumption that $\theta_{max} = \tan^{-1}\frac{2r}{l}$. According to theory[2], the intensity of the atomic beam resembles a cosine distribution. I approximate the spatial distribution of the atomic beam as a uniform distribution.
+
+The cross section for an atom is given by:
+\begin{equation}
+\sigma(\nu) = \pi r_e c f \mathscr{L}(\nu)
+\end{equation}
+where $r_e$ is the classical electron radius, $c$ is the speed of light, $f$ is the oscillator strength and $\mathscr{L}(\nu)$ is the lineshape of the transition. An atom's natural lineshape is Lorentzian in shape:
+\begin{equation}
+\mathscr{L}(\nu) = \frac{\Gamma/2}{(\nu-\nu_0)^2+(\Gamma/2)^2},
+\end{equation}
+where $\Gamma = 1/\tau$ is the natural linewidth, $\tau$ is the natural lifetime and $\nu_0$ is the resonant frequency of this transition. In an atom beam, the atoms have a Maxwell-Boltzmann distribution of velocities. The component of these velocities that is parallel to the direction of the laser beam contributes to Doppler Broadening. This broadening has a Gaussian spectral distribution, with a full width at half maximum given by:
+\begin{equation}
+\Delta \nu = \sqrt{\frac{8kT ln(2)}{mc^2}}
+\end{equation}
 \subsection{Laser Beam}
 The laser beam used to probe the atomic beam is supplied by a pump laser outputting into a tunable TiSapphire laser cavity and a frequency doubling cavity. The resulting laser can be measured with $10^{-4}$nm precision. The spatial distribution of photons is Gaussian in shape, and can be measured using a beam profiler. The spectral distribution is a gaussian shape about a chosen central $\lambda$ ($10^{-4}$nm precision). The shape is relatively narrow when compared to the FWHM of the atom's spectral lineshape. The number of photons per unit time per unit area as a function of laser frequency $\nu$, radial distance from the beam's center $r$, distance along the central beam axis $z$ and time $t$, can be written:
 
