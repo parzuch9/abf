@@ -6,6 +6,7 @@
 \usepackage{mathrsfs}
 \usepackage{amssymb}
 \usepackage{array}
+\usepackage[font={small}]{caption}
 \usepackage{geometry}
 \geometry{margin=1in}
 \author{Kristen Parzuchowski}
@@ -87,20 +88,26 @@ Isotope & Shift from $^{174}$Yb (MHz)\\
 \section{Apparatus}
 The apparatus used for these studies is the setup for the Single Atom Microscope. 
 \subsection{Atomic Oven}
-The atomic oven is the source of Yb for our atomic beam. This oven is rated for 450$^{\circ}$C, which at this operating temperature will well satisfy our requirements for Yb number density in vacuum. From theory [2] of effusive beam sources,  atomic beam flux has the relation: $Flux \propto \frac{P}{\sqrt{m}}$, where $P$ is the vapor pressure of the atoms and $m$ is the mass of atom. The vapor pressure of Yb and Mg at various temperatures is shown in figure 1. As Mg has a smaller mass and a larger vapor pressure than Yb, we can expect that this atomic oven will also satisfy the number density requirements for Mg. 
-
-
 \begin{wrapfigure}{r}{0.45\textwidth}
+\vspace*{-5mm}
   \includegraphics[scale=0.37]{vaporpressure_ybmg.png}
-  \vspace*{-3mm}
+  \vspace*{-5mm}
   \caption{Vapor Pressure (Pa) of Yb (Blue) and Mg (Green) as a function of Temperature ($^{\circ}$C). Data is extracted from equations given in [1].}
 \end{wrapfigure}
+The atomic oven is the source of Yb for our atomic beam. This oven is rated for 450$^{\circ}$C, which at this operating temperature will well satisfy our requirements for Yb number density in vacuum. From theory [2] of effusive beam sources,  atomic beam flux has the relation: $Flux \propto \frac{P}{\sqrt{m}}$, where $P$ is the vapor pressure of the atoms and $m$ is the mass of atom. The vapor pressure of Yb and Mg at various temperatures is shown in figure 1. As Mg has a smaller mass and a larger vapor pressure than Yb, we can expect that this atomic oven will also satisfy the number density requirements for Mg. 
 
 The oven design and dimensions are shown in figure 2. The atomic beam effuses through a long circular cylindrical tube aperture on the oven. If $l$, the length of the cylindrical tube, is much larger than, $r$, the radius of the aperture, the number of atoms emerging from the source per unit time can be predicted theoretically by[2]:
 \begin{equation}
 Q = \frac{2}{3}\frac{r}{l}n\bar{v}A,
 \end{equation}
 where $n$ is the number of atoms per unit volume, $\bar{v}$ is the mean atomic velocity and $A$ is the area of the source slit. In our case, $l = 0.500"$ and $r = 0.0625"$, so our assumption is satisfied fairly well.
+\begin{figure}[h]
+\centering
+\captionsetup{justification=centering}
+  \includegraphics[scale=0.22]{ybOvenCrosssection.PNG}
+  \vspace*{-3mm}
+  \caption{Yb oven cross section}
+\end{figure}
 
 \subsection{Atomic Beam}
 The atomic beam exits the oven aperture and traverses through the SAM vacuum system. This vacuum systems consists of a straight path from the oven aperture to the cryostat. The diameter of the vacuum chamber is $\sim 2.3"$, allowing for a maximum atomic beam diameter of that size. Any atoms that hit the surface of the vacuum chamber will instantly crystallize. I approximate the angle of divergence for the atomic beam through the assumption that $\theta_{max} = \tan^{-1}\frac{2r}{l}$. According to theory[2], the intensity of the atomic beam resembles a cosine distribution. I approximate the spatial distribution of the atomic beam as a uniform distribution.
@@ -157,7 +164,7 @@ A_{det} = \pi r_{det}^2,
 \end{equation}
 where $A_{det}$ is the area of the active area of the detector, $r_{det}$ is the radius of the active area of the avalanche photodiode and $d_{det}$ is the distance to the detector from a point within the fiducial volume. This light collection efficiency is valid when $\sqrt{A_{det}} << d_{det}$.
 
-Isotope shifts and hyperfine shifts complicate the spectrum of Yb for this transition. The laser must be scanned over a range of frequencies in order to excite all yb atoms of various isotopes and total angular momentum values. The current parameters I use for frequency scans(fine terascan) are:\\
+Isotope shifts and hyperfine shifts complicate the spectrum of Yb for this transition. The laser must be scanned over a range of frequencies in order to excite all yb atoms of various isotopes and total angular momentum values. The current parameters I use for frequency scans(fine terascan) are:
 \begin{center}
 Scan center:797.8228nm\\
 Scan width:3GHz\\
@@ -178,6 +185,14 @@ In order to create a frequency to resonator slow voltage calibration, the resSlo
 The data analysis program, abf$\_$dataAnalysis.m,  is written in Matlab and can be found at I:/projects/spinlab/SADiCS/Programs/MATLAB. This program determines the flux of Yb atoms at the 6-way cross given the measured data.
 
 This analysis program will prompt for an input data file produced by the jabf vi, which will correspond to a measurement at a certain temperature. Each row of data in the data file contains the recorded values at a certain time. Since this data was gathered during a laser scan, we can expect that as we progress through the data the frequency will be changing. The starting and stopping resonator slow voltages of the scan are currently hard coded into the program in order to pick the data from the scan. These values were found by hand. 
+
+\begin{wrapfigure}{r}{0.45\textwidth}
+  \vspace*{-8mm}
+  \includegraphics[scale=0.45]{APD410A2edit.png}
+  \vspace*{-6mm}
+  \caption{APD410A2 Responsivity*M (A/W) as a function of wavelength. This plot is from the manufacturer, Thorlabs.}
+\end{wrapfigure}
+
 
 The signal from the lock-in amplifier is read out as an x and y voltage signal. These can be transformed to a total amplified signal:
 \begin{equation}
@@ -209,13 +224,6 @@ Since the laser is scanned across all frequencies in the non zero range of the s
 \int_0^{\infty}\mathscr{L} (\nu_0)d\nu_0 = 1,
 \end{equation}
 where this integral is equal to one since we assume the laser and atomic beam are not polarized. The solution to this integral also assumes that the laser power is constant throughout the measurement.
-
-\begin{wrapfigure}{r}{0.45\textwidth}
-  \includegraphics[scale=0.37]{APD410A2edit.png}
-  \vspace*{-3mm}
-  \caption{APD410A2 Responsivity*M (A/W) as a function of wavelength. This plot is from the manufacturer, Thorlabs.}
-\end{wrapfigure}
-
 
 
 The fiducial volume for this experiment is the volume of intersection between the laser beam and the atomic beam. In this volume, the atoms can be excited and emit light into the detector, so it is important to understand which portion of the total atomic beam volume is excited. I approximate the fiducial volume for each possible atomic velocity as the following:
