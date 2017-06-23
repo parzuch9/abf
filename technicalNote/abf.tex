@@ -111,12 +111,13 @@ The cross section for an atom is given by:
 \end{equation}
 where $r_e$ is the classical electron radius, $c$ is the speed of light, $f$ is the oscillator strength and $\mathscr{L}(\nu)$ is the lineshape of the transition. An atom's natural lineshape is Lorentzian in shape:
 \begin{equation}
-\mathscr{L}(\nu) = \frac{\Gamma/2}{(\nu-\nu_0)^2+(\Gamma/2)^2},
+\mathscr{L}(\nu) = \frac{\Gamma/(2 \pi)}{(\nu-\nu_0)^2+(\Gamma/2)^2},
 \end{equation}
 where $\Gamma = 1/\tau$ is the natural linewidth, $\tau$ is the natural lifetime and $\nu_0$ is the resonant frequency of this transition. In an atom beam, the atoms have a Maxwell-Boltzmann distribution of velocities. The component of these velocities that is parallel to the direction of the laser beam contributes to Doppler Broadening. This broadening has a Gaussian spectral distribution, with a full width at half maximum given by:
 \begin{equation}
-\Delta \nu = \sqrt{\frac{8kT ln(2)}{mc^2}}
+\Delta \nu = \sqrt{\frac{8kT ln(2)}{mc^2}},
 \end{equation}
+where $k$ is Boltzmann's constant, $T$ is the temperature of the atoms, $m$ is the mass of the atom and $c$ is the speed of light.
 \subsection{Laser Beam}
 The laser beam used to probe the atomic beam is supplied by a pump laser outputting into a tunable TiSapphire laser cavity and a frequency doubling cavity. The resulting laser can be measured with $10^{-4}$nm precision. The spatial distribution of photons is Gaussian in shape, and can be measured using a beam profiler. The spectral distribution is a gaussian shape about a chosen central $\lambda$ ($10^{-4}$nm precision). The shape is relatively narrow when compared to the FWHM of the atom's spectral lineshape. The number of photons per unit time per unit area as a function of laser frequency $\nu$, radial distance from the beam's center $r$, distance along the central beam axis $z$ and time $t$, can be written:
 
@@ -162,7 +163,7 @@ Scan center:797.8228nm\\
 Scan width:3GHz\\
 Scan rate:10MHz/s.\\
 \end{center}
-This range is chosen in order to include all of the frequency splittings for this transition, but it is a bit overkill.  A new scan range can be determined by calculating the range more precisely or by looking in this paper [3]. I picked this rate in order to get a very detailed scan($\sim 2x10^{-5}nm/s$), this may be adjusted, but I haven't thought in depth about the best scan rate. This laser frequency cannot be electronically readout on a windows 7 computer, but the resonator slow voltage output of the laser can be sent to the DAQ card used for the measurement. A frequency to voltage calibration can be done over the range of frequencies we are interested in. This calibration will be different for other ranges of frequencies. A time varying voltage offset must be determined for each frequency scan, and can be extracted from recorded data. I currently do this by hand.
+This range is chosen in order to include all of the frequency splittings for this transition, but it is a bit overkill.  A new scan range can be determined by calculating the range more precisely or by looking in this paper [3]. I picked this rate in order to get a very detailed scan($\sim 2x10^{-5}nm/s$), with a properly chosen time constant (100ms) we can expect to cover the bandwidth of the laser(5MHz) after t = 5 time constants. 5 time constants is sufficient for an accurate response from the electronics. This laser frequency cannot be electronically readout on a windows 7 computer, but the resonator slow voltage output of the laser can be sent to the DAQ card used for the measurement. A frequency to voltage calibration can be done over the range of frequencies we are interested in. This calibration will be different for other ranges of frequencies. A time varying voltage offset must be determined for each frequency scan, and can be extracted from recorded data. I currently do this by hand.
 
 In order to create a full calibration of the atomic oven, ABF measurements must be taken at a variety of different atomic oven temperatures, starting at $450^{\circ}C$ and ending at a temperature where there are no more atoms flowing in the system. The experimenter should wait until the temperature of the oven has stabilized before taking data at that temperature. Eventually the measurements are no longer possible as the number of atoms in the system is not large enough to create a fluorescence signal strong enough to be seen above the noise floor. Currently, a signal cannot be detected below $\sim$275$^{\circ}$C. The lower temperature limit can vary depending on the pressure of the vacuum system [figure 1].
 
@@ -174,21 +175,40 @@ Values such as the conversion scale of the Thorlabs power meter and the gain of 
 In order to create a frequency to resonator slow voltage calibration, the resSlowVolt$\_$freq$\_$calib.vi in I:/projects/spinlab/vis$\_$Labview/Laser VIs can be used on the laser computer. This should be ran during a scan over the frequency range of interest. The program outputs time, wavelength, frequency and resonator slow voltage. There is already a calibration for the current range of frequencies, but in the future a scan over a different range of frequencies may be desired.
 
 \subsection{Data Analysis}
-The data analysis program, abf$\_$dataAnalysis.m,  is written in Matlab and can be found at I:/projects/spinlab/SADiCS/Programs/MATLAB. This program determines the flux of Yb atoms at the 6-way cross given the measured data:
+The data analysis program, abf$\_$dataAnalysis.m,  is written in Matlab and can be found at I:/projects/spinlab/SADiCS/Programs/MATLAB. This program determines the flux of Yb atoms at the 6-way cross given the measured data.
+
+This analysis program will prompt for an input data file produced by the jabf vi, which will correspond to a measurement at a certain temperature. Each row of data in the data file contains the recorded values at a certain time. Since this data was gathered during a laser scan, we can expect that as we progress through the data the frequency will be changing. The starting and stopping resonator slow voltages of the scan are currently hard coded into the program in order to pick the data from the scan. These values were found by hand. 
+
+The signal from the lock-in amplifier is read out as an x and y voltage signal. These can be transformed to a total amplified signal:
 \begin{equation}
-Flux = \frac{F \cdot v_{rms}}{V_{fid}\cdot R \cdot \frac{\Omega}{4\pi} },
+\mathscr{R} = \sqrt{x^2+y^2}.
 \end{equation}
-where $F$ is the photon detection rate, $v_{rms}$ is the rms velocity, $V_{fid}$ is the fiducial volume, $R$ is the excitation rate per atom and $\frac{\Omega}{4 \pi}$ is the light collection efficiency of the detector. 
-
-This analysis program will prompt for an input data file produced by the jabf vi, which will correspond to a measurement at a certain temperature. Each row of data in the data file contains the recorded values at a certain time. Since this data was gathered during a laser scan, we can expect that as we progress through the data the frequency will be changing. The starting and stopping resonator slow voltages of the scan are currently hard coded into the program, in order to pick the data from the scan. These values were found by hand. 
-
-The program also prompts for a laser power data file of .csv type. This file should be saved when measuring the power directly before starting a scanning measurement. Once the laser power data is selected, the program averages the power readings in the data file and determines the peak laser power. The program then uses the voltage readings from the Thorlabs power meter to monitor the power stability and make any adjustments when power fluctuations occur. 
-
-The beam profile data is currently only used to find the major and minor beam radii. I take two beam profile measurements before and after the experiment and average the measured radii.  The laser beam is approximated as a circle with a radius that is the average of the two radii of the ellipse. The radius is hard coded into the program. The intensity distribution is approximated as a uniform distribution as opposed to a Gaussian distribution. Under the approximation, the laser beam photon flux becomes:
+This amplified signal can be used to extract the number of photons hitting the avalanche photodetector per unit time per unit frequency bin:
 \begin{equation}
-\Phi = \frac{2P_0}{\pi w^2 h \nu},
+F/(\Delta \nu) = \frac{R}{\frac{\mathcal{R}(\lambda)}{50}\cdot M\cdot G \cdot h\nu \cdot \Delta \nu},
 \end{equation}
-where $P_0$ is the peak laser power, $w$ is the beam radius, $h$ is planck's constant and $\nu$ is the laser frequency.
+where $\mathcal{R}(\lambda)$ is the detector responsivity, which can be determined by figure 3, $M$ is the gain of the detector (5-50) and $G$ is the amplifier's transimpedance (500kV/A). To arrive at the total number of detected photons per unit time, an integration is performed over all frequency bins:
+\begin{equation}
+F = \int_{\nu_i}^{\nu_f}F/(\Delta \nu)d\Delta \nu
+\end{equation}
+
+The program also prompts for a laser power data file of .csv type. This file should be saved when measuring the power directly before starting a scanning measurement. Once the laser power data is selected, the program averages the power readings in the data file. The program could then uses the voltage readings from the Thorlabs power meter to monitor the power stability and make any adjustments when power fluctuations occur, but this has yet to be implemented. 
+
+The beam profile data is currently used to find the major and minor beam radii. I take two beam profile measurements before and after the experiment and average the measured radii.  The laser beam is approximated as a circle with a radius that is the average of the two radii of the ellipse. The radius is hard coded into the program. The spatial distribution is approximated as a uniform distribution as opposed to a Gaussian distribution. I set the spatial exponential term equal to 1 in equation 6. 
+
+Under the assumptions about the laser power stated above, the excitation rate of the atom can be calculated using:
+\begin{equation}
+R = \int_{0}^{\infty}\sigma(\nu) \phi(\nu)d\nu = \frac{P_0}{h \nu_0} \frac{2}{\pi w^2} \pi r_e c f \int_{0}^{\infty} \mathscr{L}(\nu) \mathscr{G}(\nu),
+\end{equation}
+where $P_0$ is the peak laser power, $w$ is the beam radius, $h$ is planck's constant and $\nu_0$ is the central laser frequency. When the FWHM of the spectral distribution of the atom's cross section is much greater than the FWHM of the laser's spectral distribution, the excitation rate reduces to:
+\begin{equation}
+R =\frac{2P_0}{\pi w^2 h \nu_0} \pi r_e c f \mathscr{L} (\nu_0).
+\end{equation}
+Since the laser is scanned across all frequencies in the non zero range of the spectral shape, the lineshape is integrated over:
+\begin{equation}
+\int_0^{\infty}\mathscr{L} (\nu_0)d\nu_0 = 1,
+\end{equation}
+where this integral is equal to one since we assume the laser and atomic beam are not polarized. The solution to this integral also assumes that the laser power is constant throughout the measurement.
 
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[scale=0.37]{APD410A2edit.png}
@@ -196,45 +216,25 @@ where $P_0$ is the peak laser power, $w$ is the beam radius, $h$ is planck's con
   \caption{APD410A2 Responsivity*M (A/W) as a function of wavelength. This plot is from the manufacturer, Thorlabs.}
 \end{wrapfigure}
 
-The signal from the lock-in amplifier is read out as an x and y signal. These can be transformed to a total amplified signal:
-\begin{equation}
-R = \sqrt{x^2+y^2}
-\end{equation}
-This amplified signal can be used to extract the number of photons hitting the avalanche photodetector:
-\begin{equation}
-N = \frac{R}{\frac{\mathcal{R}(\lambda)}{50}\cdot M\cdot G \cdot h\nu},
-\end{equation}
-where $\mathcal{R}(\lambda)$ is the detector responsivity, which can be determined by figure 3, $M$ is the gain of the detector (5-50) and $G$ is the amplifier's transimpedance (500kV/A).
 
-The velocity of the atoms in the vacuum system can be described by a Maxwell-Boltzmann distribution:
-\begin{equation}
-f(v) = \sqrt{(\frac{m}{2\pi k T})^3}4\pi v^2 e^{\frac{-mv^2}{2kT}},
-\end{equation}
-where $m$ is the atom's mass, $k$ is Boltzmann's constant, $T$ is the temperature of the atom \& oven and $v$ is the velocity of the atom. We can expect that the spectral line shape will be Doppler broadened, but only due to the portion of the velocity in the direction of the laser beam.
-
-I calculate the atomic cross section  using:
-\begin{equation}
-\sigma_i = \pi r_e c f \mathscr{L}(\nu),
-\mathscr{L}(\nu) = \frac{\frac{\Gamma}{2\pi}}{(\nu-\nu_0)^2+\frac{\Gamma^2}{4}},
-\end{equation}
-where $r_e$ is the classical electron radius, $c$ is the speed of light, $f$ is the oscillator strength for this transition and $\mathscr{L}(\nu)$ is the Lorentzian line shape function at $\nu$ for this transition.
 
 The fiducial volume for this experiment is the volume of intersection between the laser beam and the atomic beam. In this volume, the atoms can be excited and emit light into the detector, so it is important to understand which portion of the total atomic beam volume is excited. I approximate the fiducial volume for each possible atomic velocity as the following:
 \begin{equation}
-V_{fid}(v) = \frac{\pi w^2}{n f(v) \cdot \sum\limits_{i} \sigma_i P_i},
+V_{fid}(v) = \pi w^2\cdot d
 \end{equation}
-where $f(v)$ is the Maxwell Boltzmann distribution at a velocity $v$, $\sigma_i$ is the cross section for isotope $i$ at a given frequency and $P_i$ is the fraction of isotope $i$ in natural Yb.
+where $w$ is the laser beam radius and $d$ is the size of the atomic beam its intersection with the laser beam. The equation used to calculate flux assumes that the fiducial volume can be approximated as a point, thus this fiducial volume is much larger than desired. 
 
-The number of atoms in the fiducial volume can be calculated by:
-\begin{equation}
-N_{fid} = \frac{N}{R \cdot \frac{\Omega}{4\pi}},
-\end{equation}
-where $N$ is the number of photons hitting the APD and $R$ is the net excitation rate.
+I calculated the light collection efficiency for this fiducial volume using equation 8. For what I consider my best estimate, I picked a point one third of the distance from the center of the six way cross to the edge of the fiducial volume along the central laser beam axis and set $d_{det}$ as the distance from this point to the detector. I used this point because I estimated that it is the average weighted position of atoms, as I expect the majority of the atoms to lie in the center of the fiducial volume.
 
-The atomic flux can then be deduced:
+With these calculations for total detected fluorescence rate, excitation rate per atom, fiducial volume and light collection efficiency, the number density of atoms can be caluclated as:
 \begin{equation}
-Flux = N_{fid}\cdot \sum\limits_i \frac{v_i}{V_{fid}(v_i)}
+n = \frac{F}{V_{fid}\cdot R \cdot \frac{\Omega}{4\pi} }.
 \end{equation}
+This can be transformed into a flux of atoms using:
+\begin{equation}
+Flux = n\cdot v_{rms},
+\end{equation}
+where $v_{rms}$ is the rms velocity calculated using Boltzmann statistics.
 
 
 \subsection{Measurements to date}
@@ -259,6 +259,41 @@ Date & Experiment Summary & Notes\\
 \end{center}
 
 
+
+\subsection{Uncertainty}
+In the table below, uncertainty of experimental quantities are stated.
+\begin{center}
+\begin{tabular}{||p{3cm}|p{3cm}|p{8cm}||}
+\hline
+Experimental factor & Uncertainty & Considerations - Determination\\
+\hline\hline
+ Laser Power & 1)2.5 \% 2)6 \% & 1) accuracy and precision of power meter - manufacturer spec 2) loss of light through window - may lose this percentage of light\\
+\hline
+ Wavelength & 1)2x10$^{-4}$\%  2)4.05x10$^{-1}$ \%& 1) accuracy and precision of wave meter and laser - manufacturer spec 2) uncertainty in resonator slow voltage fit - calculation\\
+\hline
+ Detector efficiency & 1) 25 \% & 1) accuracy and precision of manufacturer's conversion efficiency - estimation of possible error in specs (This should be tested)\\
+\hline 
+ Voltage readings from lock-in &  & Delay in response \\
+\hline
+ Light collection efficiency & 1) 2.6\% 2) 6\%& 1) approximation for efficiency - variation in efficiencies about volume 2) loss of light through window and filter - may lose this percentage of light\\
+\hline
+ Fiducial Volume & 1)  & 1) assumption of divergence angle of atomic beam \\
+\hline
+ Origin of photons &  1)  & 1) assumption that fluorescence is the only light hitting the detector\\
+\hline
+ Velocity of atoms &  & accuracy and precision of temperature sensor, assumption that all atoms at temperature of temperature sensor \\
+\hline
+ Laser beam spatial distribution &  & Assumption that spatial distribution is uniform throughout circular area \\
+\hline
+ Laser beam spectral distribution &  & Assumption that distribution is a delta function at central frequency \\
+\hline
+ Atomic beam spatial distribution & 1) 54 \% & Assumption that distribution is uniform - average variation from a cosine distribution \\
+ \hline
+ Atom's lineshape for transition & 1) 1 \%  & 1) assumption that atom beam and laser beam are not polarized - estimated likelihood of incorrect assumption\\
+ \hline
+\end{tabular}
+\end{center}
+
 \section{Atomic Beam Flux Simulation}
 The atomic beam flux simulation calculates the flux at a chosen location along the atomic beam path,
 \begin{equation}
@@ -268,54 +303,17 @@ where Q is given in equation 1 and R is the radius of the atomic beam at the cho
 
 The simulation is most useful if it predicts the signal measured by the APD during an atomic beam flux measurement, but this has yet to be implemented. The predicted signal can be used for quick comparisons during measurements. It is also useful for simulating a desired change to the experiment. 
 
-To expand upon the simulation, the excitation rate for yb atoms of various isotopes and total angular momentum values must be well understand theoretically. The frequency spacings and isotopic abundances listed above can be used to predict the location of a resonant frequency. The spectal shapes can be determined by considering the convolution of the natural Lorentzian lineshapes with Doppler broadened lineshapes. I am unsure if other broadening factors play a role in the final lineshape. The excitation rate of a given isotope can be calculated by:
-\begin{equation}
-R_i = \int_{0}^{\infty}\sigma_i(\nu) \phi(\nu)d\nu = \frac{P_0}{h \nu_0} \frac{2}{\pi w^2} Exp[-\frac{2r^2}{w^2}]\pi r_e c f \int_{0}^{\infty} \mathscr{L}(\nu) \mathscr{G}(\nu),
-\end{equation}
-where $\nu_0$ is the central frequency of the laser. When the FWHM of the spectral distribution of the atom's cross section is much greater than the FWHM of the laser's spectral distribution, the excitation rate reduces to:
-\begin{equation}
-R_i =\frac{2P_0}{\pi w^2 h \nu_0} Exp[-\frac{2r^2}{w^2}] \pi r_e c f \mathscr{L} (\nu_0),
-\end{equation}
+
+\section{Further Work}
+Simulating the spectrum of yb for this transition is useful for determining if other unseen factors play a role in our measured spectrum. The frequency spacings and isotopic abundances listed above can be used to predict the location of a resonant frequency initially, but theoretical predictions of these spacings are the ultimate goal. The spectral shapes can be simulated by considering the convolution of the natural Lorentzian lineshapes with Doppler broadened lineshapes. If other broadening mechanisms are at play or if the laser or atomic beam is polarized, the differences between the simulation and the measured spectrum may be obvious. 
 
 
 
-
-\section{Uncertainty}
-In the table below, uncertainty of experimental quantities are stated.
-\begin{center}
-\begin{tabular}{||c|c|p{8cm}||}
-\hline
-Experimental factor & Uncertainty & Considerations\\
-\hline\hline
- Laser Power &  & Accuracy and precision of power meter, loss of light through window\\
-\hline
- Wavelength &  & Accuracy and precision of wave meter and laser, uncertainty in resonator slow voltage fit\\
-\hline
- Detector Efficiency &  & Accuracy and precision of manufacturer's conversion efficiency\\
-\hline 
- Voltage readings from lock-in &  & \\
-\hline
- Light collection efficiency &  & Accuracy and precision of approximation for efficiency, assumption that fluorescence is isotropic, loss of light through window\\
-\hline
- Fiducial Volume &  & Assumption of divergence angle of atomic beam\\
-\hline
- Origin of photons &  & Assumption that fluorescence is the only light hitting the detector\\
-\hline
- Velocity of atoms &  & Accuracy and precision of temperature sensor, assumption that all atoms at temperature of temperature sensor \\
-\hline
- Laser beam spatial distribution &  & Assumption that spatial distribution is uniform throughout circular area \\
-\hline
- Laser beam spectral distribution &  & Assumption that distribution is a delta function at central frequency \\
-\hline
- Atomic beam spatial distribution &  & Assumption that distribution is uniform\\
- \hline
- Atom's lineshape for transition &  & Accuracy and precision of measured lineshape \\
- \hline
-\end{tabular}
-\end{center}
 \nocite{*}
 \bibliography{references}{}
 \bibliographystyle{unsrt}
+
+
 
 
 \end{document}
