@@ -16,7 +16,7 @@
 The Single Atom Microscope (SAM) will be used to measure rare nuclear reaction rates relevant for nuclear astrophysics. SAM will capture and detect all of the product atoms of the reactions of interest inside of a solid film of Neon. A detailed understanding of the number of atoms embedded in Neon is necessary in order to determine the intrinsic brightness of the product atoms in medium. This technical note describes the current status of the atom number in medium calibration including all assumptions made.
 \end{abstract}
 \section{Introduction}
-The Single Atom Microscope is a new detector we are designing in order to measure rare nuclear reactions relevant for Nuclear Astrophysics. This detector captures and detects all product atoms of the reaction of interest inside of solid Neon. Our detection is highly efficient, because the solid Neon will capture all product, highly selective, because the product atoms are selected using resonant laser excitation, and highly sensitive, because there is a large shift between the emission and excitation spectrum of the product atom which significantly suppresses scattered light background from the laser [1,2]. My primary interest is in determining exactly how sensitive our technique is, or what the intrinsic brightness of our product atoms in solid Neon is. A low intrinsic brightness will require long integration times in order to detect single atoms. 
+The Single Atom Microscope is a new detector we are designing in order to measure rare nuclear reactions relevant for Nuclear Astrophysics. This detector captures and detects all product atoms of the reaction of interest inside of solid Neon. Our detection is highly efficient, because the solid Neon will capture all product atoms, highly selective, because the product atoms are selected using resonant laser excitation, and highly sensitive, because there is a large shift between the emission and excitation spectrum of the product atom which significantly suppresses scattered light background from the laser [1,2]. My primary interest is in determining exactly how sensitive our technique is, or what the intrinsic brightness of our product atoms in solid Neon is. A low intrinsic brightness will require long integration times in order to detect single atoms. 
 
 A number of things must be known in order to determine the intrinsic brightness of the product atoms in medium:
 \begin{itemize}
@@ -142,7 +142,7 @@ where $P_0$ is the peak laser power, $w(z)$ is the beam radius as a function of 
   \vspace*{-3mm}
   \caption{Schematic of the setup for ABF measurements.}
 \end{wrapfigure}
-Atomic beam flux measurements are performed using the Single Atom Microscope setup, the BLUREI laser in Spinlab, and various optics, optomechanics and electronic devices. This experiment probes the strong Yb $^{1}P_{1} -> ^{1}S_{0}$ transition through laser excitation of the atomic beam. The spontaneous emission of the atoms is measured using an avalanche photodetector set up at $90^{\circ}$ to the excitation laser. Using arguments for detector efficiency, geometry and properties of the atomic and laser beams, a yb number density in vacuum can be extracted from these measurements. The schematic of this setup is shown in figure 2. The signal from the photodetector is amplified and extracted using an optical chopper paired with a lock-in amplifier.
+Atomic beam flux measurements are performed using the Single Atom Microscope setup, the BLUREI laser in Spinlab, and various optics, optomechanics and electronic devices. This experiment probes the strong Yb $6s6p$ $ ^{1}P_{1} -> 6s^2 $ $^{1}S_{0}$ transition through laser excitation of the atomic beam. The spontaneous emission of the atoms is measured using an avalanche photodetector set up at $90^{\circ}$ to the excitation laser. Using arguments for detector efficiency, geometry and properties of the atomic and laser beams, a yb number density in vacuum can be extracted from these measurements. The schematic of this setup is shown in figure 2. The signal from the photodetector is amplified and extracted using an optical chopper paired with a lock-in amplifier.
 
 The operating procedures for atomic beam fluorescence measurements can be found at I:/projects/spinlab/SADiCS/Setup\_NSCL/Instructions\_Procedures/170621\_ABF\_Procedures.docx.
  
@@ -170,7 +170,7 @@ Scan center:797.8228nm\\
 Scan width:3GHz\\
 Scan rate:10MHz/s.\\
 \end{center}
-This range is chosen in order to include all of the frequency splittings for this transition, but it is a bit overkill.  A new scan range can be determined by calculating the range more precisely or by looking in this paper [3]. I picked this rate in order to get a very detailed scan($\sim 2x10^{-5}nm/s$), with a properly chosen time constant (100ms) we can expect to cover the bandwidth of the laser(5MHz) after t = 5 time constants. 5 time constants is sufficient for an accurate response from the electronics. This laser frequency cannot be electronically readout on a windows 7 computer, but the resonator slow voltage output of the laser can be sent to the DAQ card used for the measurement. A frequency to voltage calibration can be done over the range of frequencies we are interested in. This calibration will be different for other ranges of frequencies. A time varying voltage offset must be determined for each frequency scan, and can be extracted from recorded data. I currently do this by hand.
+This range is chosen in order to include all of the frequency splittings for this transition, but it is a bit overkill.  A new scan range can be determined by calculating the range more precisely or by looking in this paper [3]. I picked this rate in order to get a very detailed scan($\sim 2x10^{-5}nm/s$), with a properly chosen time constant $(\tau)$ we can expect to cover the bandwidth of the laser(5MHz) after t = 5$\tau$. The signal response of the electronics goes like $1-Exp[-t/\tau]$, so after 5 $\tau$ we can reasonably expect a reliable signal. Taking data at intervals larger than 5MHz will average out features of the signal. This laser frequency cannot be electronically readout on a windows 7 computer, but the resonator slow voltage output of the laser can be sent to the DAQ card used for the measurement. A frequency to voltage calibration can be done over the range of frequencies we are interested in. This calibration will be different for other ranges of frequencies. A time varying voltage offset must be determined for each frequency scan, and can be extracted from recorded data. I currently do this by hand.
 
 In order to create a full calibration of the atomic oven, ABF measurements must be taken at a variety of different atomic oven temperatures, starting at $450^{\circ}C$ and ending at a temperature where there are no more atoms flowing in the system. The experimenter should wait until the temperature of the oven has stabilized before taking data at that temperature. Eventually the measurements are no longer possible as the number of atoms in the system is not large enough to create a fluorescence signal strong enough to be seen above the noise floor. Currently, a signal cannot be detected below $\sim$275$^{\circ}$C. The lower temperature limit can vary depending on the pressure of the vacuum system [figure 1].
 
@@ -200,12 +200,13 @@ The signal from the lock-in amplifier is read out as an x and y voltage signal. 
 \end{equation}
 This amplified signal can be used to extract the number of photons hitting the avalanche photodetector per unit time per unit frequency bin:
 \begin{equation}
-F/(\Delta \nu) = \frac{R}{\frac{\mathcal{R}(\lambda)}{50}\cdot M\cdot G \cdot h\nu \cdot \Delta \nu},
+F/(\Delta \nu) = \frac{R}{\frac{\mathcal{R}(\lambda)}{50}\cdot M\cdot G \cdot h\nu},
 \end{equation}
-where $\mathcal{R}(\lambda)$ is the detector responsivity, which can be determined by figure 3, $M$ is the gain of the detector (5-50) and $G$ is the amplifier's transimpedance (500kV/A). To arrive at the total number of detected photons per unit time, an integration is performed over all frequency bins:
+where $\mathcal{R}(\lambda)$ is the detector responsivity, which can be determined by figure 3, $M$ is the gain of the detector (5-50) and $G$ is the amplifier's transimpedance (500kV/A). To arrive at the total number of detected photons per unit time, a sum is performed over all frequency bins:
 \begin{equation}
-F = \int_{\nu_i}^{\nu_f}F/(\Delta \nu)d\Delta \nu
+F = \sum_{i=0}^{N}(\frac{F}{\Delta \nu})_i \Delta \nu,
 \end{equation}
+where $i=0$ is the first data point in the scan and $N$ is the last data point.
 
 The program also prompts for a laser power data file of .csv type. This file should be saved when measuring the power directly before starting a scanning measurement. Once the laser power data is selected, the program averages the power readings in the data file. The program could then uses the voltage readings from the Thorlabs power meter to monitor the power stability and make any adjustments when power fluctuations occur, but this has yet to be implemented. 
 
@@ -273,34 +274,74 @@ In the table below, uncertainty of experimental quantities are stated.
 \begin{center}
 \begin{tabular}{||p{3cm}|p{3cm}|p{8cm}||}
 \hline
-Experimental factor & Uncertainty & Considerations - Determination\\
+Experimental factor & Uncertainty & Considerations\\
 \hline\hline
- Laser Power & 1)2.5 \% 2)6 \% & 1) accuracy and precision of power meter - manufacturer spec 2) loss of light through window - may lose this percentage of light\\
+ Laser Power & 1) 2.5\% 2) 0.5\% & 1) accuracy and precision of power meter calibration 2) loss of light through window\\
 \hline
- Wavelength & 1)2x10$^{-4}$\%  2)4.05x10$^{-1}$ \%& 1) accuracy and precision of wave meter and laser - manufacturer spec 2) uncertainty in resonator slow voltage fit - calculation\\
+ Wavelength & 1) 2x10$^{-4}$\%  2) 4.05x10$^{-1}$\%& 1) accuracy and precision of wave meter 2) uncertainty in resonator slow voltage fit - calculation\\
 \hline
- Detector efficiency & 1) 25 \% & 1) accuracy and precision of manufacturer's conversion efficiency - estimation of possible error in specs (This should be tested)\\
+ Detector efficiency & 1) ? & 1) accuracy and precision of manufacturer's conversion efficiency\\
 \hline 
- Voltage readings from lock-in &  & Delay in response \\
+ Voltage readings from lock-in & 1) ? & 1) delay in response \\
 \hline
- Light collection efficiency & 1) 2.6\% 2) 6\%& 1) approximation for efficiency - variation in efficiencies about volume 2) loss of light through window and filter - may lose this percentage of light\\
+ Light collection efficiency & 1) 2.6\% 2) 20\%& 1) approximation for efficiency 2) loss of light through window and filter\\
 \hline
- Fiducial Volume & 1)  & 1) assumption of divergence angle of atomic beam \\
+ Fiducial Volume & 1) 84.63\% 2) 4.56\% & 1) assumption of divergence angle of atomic beam 2) assumption that the diameter of the laser is 2w\\
 \hline
- Origin of photons &  1)  & 1) assumption that fluorescence is the only light hitting the detector\\
+ Origin of photons &  1) ? & 1) assumption that fluorescence is the only light hitting the detector\\
 \hline
- Velocity of atoms &  & accuracy and precision of temperature sensor, assumption that all atoms at temperature of temperature sensor \\
+ Velocity of atoms & 1) 1.25$^{\circ}$C = max 0.5\% & accuracy and precision of temperature sensor, assumption that all atoms at temperature of temperature sensor \\
 \hline
- Laser beam spatial distribution &  & Assumption that spatial distribution is uniform throughout circular area \\
+ Laser beam spatial distribution & 1) 25.83\% & 1) assumption that spatial distribution is uniform throughout circular area \\
 \hline
- Laser beam spectral distribution &  & Assumption that distribution is a delta function at central frequency \\
+ Laser beam spectral distribution & 1) ? & 1) assumption that distribution is a delta function at central frequency \\
 \hline
- Atomic beam spatial distribution & 1) 54 \% & Assumption that distribution is uniform - average variation from a cosine distribution \\
+ Atomic beam spatial distribution & 1) 1.95\% & Assumption that distribution is uniform \\
  \hline
- Atom's lineshape for transition & 1) 1 \%  & 1) assumption that atom beam and laser beam are not polarized - estimated likelihood of incorrect assumption\\
+ Atom's lineshape for transition & 1) ?  & 1) assumption that atom beam and laser beam are not polarized\\
  \hline
 \end{tabular}
 \end{center}
+Many of these uncertainty calculations involve using the following equation for calculating the uncertainty of function f:
+\begin{equation}
+\delta f(x,y,...) = \sqrt{(\frac{\partial f}{\partial x}\delta x)^2 + (\frac{\partial f}{\partial y}\delta y)^2 + ... }.
+\end{equation}
+
+
+The laser power has an uncertainty from the manufacturer's calibration of the UP12E-20H-H5-INT-D0 power meter, this was given by the manufacturer as 2.5 \%. Thorlab's coated viewport specifications claim less than 0.5\% reflectance, which adds an additional uncertainty.
+
+The wavemeter(WS6-600) specifications claim an absolute accuracy of 600MHz. This results in a maximum uncertainty of 1.60x10$^{-4}$ for our scanning range. My fit for frequency as a function of resonator slow voltage is of the form:
+\begin{equation}
+\nu = A \cdot V + B \cdot V^2,
+\end{equation}
+where $V$ is the resonator slow voltage and $A$ and $B$ are fit constants. I calculated the uncertainty using equation 18, with $A$, $B$ and $V$ all having uncertainties. I used the standard deviation of $V$ measured by the jabf vi as its uncertainty.
+
+The uncertainty in the detector efficiency is a quantity that can be measured. The manufacturer provides a detector "responsivity", but there is no associated error. To test this, a power measurement of a low powered laser set to our central frequency should be performed and then the power meter should be replaced by the APD for a voltage response measurement. The set power of the laser should be similar to the amount of fluorescence that typically enters the APD during an ABF measurement. The power measurement and APD measurement should be done as close in time as possible and as close to the same experimental conditions as possible to find an accurate number. This measurement should be done a number of times to increase the precision.
+
+The voltage readings from the lock-in amplifier may have some amount of uncertainty associated with a delay in it's response to input signal changes, but I have not determined this. There is a 1\% uncertainty in the gain accuracy and the noise in the voltage is typically $9V/\sqrt{Hz}$ at 1kHz according to the lock-in amplifier specifications. 
+
+The light collection efficiency has an uncertainty associated with the fact that the volume is not point-like. For each point in the fiducial volume there are different light collection efficiencies. I looked at the point with the light collection efficiency that had the largest difference from the light collection efficiency I used in my calculations. This difference relative to the light collection efficiency I used is the uncertainty associated with the size of the fiducial volume. There is also some uncertainty due to the loss of light through the viewport and the filter. Transmission for each of these components is rated at greater than 90 \%. Thus, I will add an uncertainty of 20 \%. The transmission through these components can be tested in our lab and then accounted for. 
+
+I would assume that the majority of the error associated with the calculation of the fiducial volume comes from my angle of divergence for the atomic beam. Currently my error associated with this considers the difference between my current calculated atomic beam diameter and the largest possible diameter. The current atomic beam diameter is 31.63mm and the largest possible diameter is the diameter of the vacuum chamber, $\sim$ 58.4mm. This gives an uncertainty of 84.63 \%! I have not figured out the best way to associate an error to this width. There is also error from the use of the Gaussian beam diameter as the width of the beam, which does not account for 4.56 \% of the beam intensity:
+\begin{equation}
+\int_{w}^{\infty} \sqrt{\frac{8}{\pi w^2}} Exp[-2r^2/w^2]dr \sim 0.0456.
+\end{equation}
+
+This analysis assumes that all of the photons contributing to the voltage signal that the lock-in amplifier processes are from Yb fluorescence. This is probably a very good approximation as there are many factors that eliminate background light from contributing. The only measured photon signal must oscillate at the same frequency as the lock-in amplifier, the black foil in the chamber and the lens tube connected to the APD absorb background light, the bandpass filter blocks a very large amount of light outside of 400nm $\pm$ 12nm and the APD is placed at 90$^{\circ}$ to the laser beam path. I would guess that almost all of the light that is not fluorescence is within the passable wavelength range of the bandpass filter and enters through the small space between the viewport and the machined adapter for optics mounts. Another very small fraction of light may come in the viewports that the laser beam penetrates through and happens to be resonant with the atom. This light would then have to scatter towards the detector. This light would only contribute to the uncertainty if it is not measured by the power meter. The uncertainty of the origin of photons can be measured. To do this, a spectrometer should be used near the entrances to the setup to determine the amount of light in the passable range of the bandpass filter. Using geometry arguments, a reasonable estimate of the uncertainty can be made.
+
+There is an uncertainty associated with the velocity of the atoms due to the precision of the temperature sensor. The temperature sensor specifications claims a $\sim$1.25$^{\circ}$C  uncertainty in our range of temperatures when the device is operated at room temperature. There is also uncertainty due to the assumption that all of the atoms are at the temperature detected by the temperature sensor. The temperature sensor is not in direct contact with the atoms, so this may not be a correct assumption. A calculation of the heat loss due to the different materials should be done to estimate the difference in temperatures.
+
+The laser beam spatial distribution is approximated as a uniform distribution of diameter 2w. In reality, it is very Gaussian in shape. To calculate the error in my approximation, I determined the normalized uniform distribution and the normalized Gaussian distribution describing the laser beam's spatial distribution and determined an average difference between the two:
+\begin{equation}
+D_{avg}=\frac{1}{N}\sum_{i=0}^{N}{|U(r_i)-G(r_i)|},
+\end{equation}
+where $U(r)$ is the normalized uniform distribution, $G(r)$ is the normalized Gaussian distribution and $N$ was 6 in my rough calculation. Each $r_i$ is equidistant apart. I compare this average difference to the amplitude of the uniform distribution in order to get the uncertainty.
+
+The spectral distribution of the laser beam is approximated as a delta function at the central frequency. In reality, it is Gaussian in shape with a FWHM of 5MHz. This approximation may be rather good since the laser is scanned over all frequencies in the spectral shape of the transition for Yb, so frequency is integrated over. I have not determined how to approximate the uncertainty for this assumption.
+
+The spatial distribution of the atomic beam is approximated as a uniform distribution across the laser beam axis. Theory [2] predicts that this distribution should look more like a cosine distribution. I used equation 21, replacing the normalized Gaussian with a normalized cosine distribution. Here, I used N=7.
+
+The uncertainty associated with the lineshape for this atomic transition is a result of my assumption that the laser and atomic beam are not polarized. As we are not aware of any factors in the experiment that would polarize the beams, it is a reasonable assumption. If this is not the case, there may be an additional factor in the excitation rate per atom equation. Theoretical calculations or simulations could be done to try to determine the lineshape resulting from an unpolarized beam of atoms. 
 
 \section{Atomic Beam Flux Simulation}
 The atomic beam flux simulation calculates the flux at a chosen location along the atomic beam path,
@@ -310,11 +351,6 @@ Flux = \frac{Q}{\pi R^{2}},
 where Q is given in equation 1 and R is the radius of the atomic beam at the chosen location. For our purposes, it is most useful to simulate the flux at the position where ABF measurements occur, the 6-way cross. 
 
 The simulation is most useful if it predicts the signal measured by the APD during an atomic beam flux measurement, but this has yet to be implemented. The predicted signal can be used for quick comparisons during measurements. It is also useful for simulating a desired change to the experiment. 
-
-
-\section{Further Work}
-Simulating the spectrum of yb for this transition is useful for determining if other unseen factors play a role in our measured spectrum. The frequency spacings and isotopic abundances listed above can be used to predict the location of a resonant frequency initially, but theoretical predictions of these spacings are the ultimate goal. The spectral shapes can be simulated by considering the convolution of the natural Lorentzian lineshapes with Doppler broadened lineshapes. If other broadening mechanisms are at play or if the laser or atomic beam is polarized, the differences between the simulation and the measured spectrum may be obvious. 
-
 
 
 \nocite{*}
