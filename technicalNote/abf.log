@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.28)  23 JUN 2017 20:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.28)  21 JUL 2017 23:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -136,18 +136,18 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 ) (./abf.aux)
 \openout1 = `abf.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -243,27 +243,27 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 14.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 17.
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 14.
+LaTeX Font Info:    Try loading font information for U+msa on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 14.
+LaTeX Font Info:    Try loading font information for U+msb on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 23.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 23.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 26.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
@@ -271,33 +271,37 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 File: vaporpressure_ybmg.png Graphic file (type png)
 
 <use vaporpressure_ybmg.png>
-Package pdftex.def Info: vaporpressure_ybmg.png used on input line 93.
+Package pdftex.def Info: vaporpressure_ybmg.png used on input line 96.
 (pdftex.def)             Requested size: 221.34348pt x 149.29543pt.
 
-Overfull \hbox (17.50931pt too wide) in paragraph at lines 93--95
+Overfull \hbox (17.50931pt too wide) in paragraph at lines 96--98
 [][]
  []
 
-[2] <ybOvenCrosssection.PNG, id=19, 829.59938pt x 830.35219pt>
-File: ybOvenCrosssection.PNG Graphic file (type png)
+[2] <ybOvenCrosssectionEdit.PNG, id=19, 1273.558pt x 990.099pt>
+File: ybOvenCrosssectionEdit.PNG Graphic file (type png)
 
-<use ybOvenCrosssection.PNG>
-Package pdftex.def Info: ybOvenCrosssection.PNG used on input line 107.
-(pdftex.def)             Requested size: 182.51242pt x 182.67804pt.
- [3 <./vaporpressure_ybmg.png> <./ybOvenCrosssection.PNG>] <abf_schematic.png, 
-id=27, 477.34335pt x 246.4407pt>
+<use ybOvenCrosssectionEdit.PNG>
+Package pdftex.def Info: ybOvenCrosssectionEdit.PNG used on input line 111.
+(pdftex.def)             Requested size: 471.20909pt x 366.3309pt.
+
+Overfull \hbox (18.2412pt too wide) in paragraph at lines 111--113
+ [][] 
+ []
+
+[3 <./vaporpressure_ybmg.png> <./ybOvenCrosssectionEdit.PNG>]
+<abf_schematic.png, id=27, 477.34335pt x 246.4407pt>
 File: abf_schematic.png Graphic file (type png)
-
-<use abf_schematic.png>
-Package pdftex.def Info: abf_schematic.png used on input line 141.
+ <use abf_schematic.png>
+Package pdftex.def Info: abf_schematic.png used on input line 146.
 (pdftex.def)             Requested size: 238.67108pt x 123.22005pt.
 
-Overfull \hbox (12.18713pt too wide) in paragraph at lines 141--143
+Overfull \hbox (12.18713pt too wide) in paragraph at lines 146--148
 [][]
  []
 
 [4] [5 <./abf_schematic.png>] [6]
-Overfull \hbox (8.23705pt too wide) in paragraph at lines 178--179
+Overfull \hbox (8.23705pt too wide) in paragraph at lines 183--184
 \OT1/cmr/m/n/12 The ex-per-i-ment is run us-ing the jabf.vi found in \OT1/cmr/m
 /n/10 I:/projects/spinlab/SADiCS/Programs/LabVIEW
  []
@@ -305,186 +309,166 @@ Overfull \hbox (8.23705pt too wide) in paragraph at lines 178--179
 <APD410A2edit.png, id=40, 452.089pt x 311.564pt>
 File: APD410A2edit.png Graphic file (type png)
  <use APD410A2edit.png>
-Package pdftex.def Info: APD410A2edit.png used on input line 191.
+Package pdftex.def Info: APD410A2edit.png used on input line 194.
 (pdftex.def)             Requested size: 203.43817pt x 140.20248pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--193
+Underfull \hbox (badness 10000) in paragraph at lines 194--196
 [][]
  []
 
 
-Underfull \hbox (badness 2547) in paragraph at lines 193--193
+Underfull \hbox (badness 2547) in paragraph at lines 196--196
 []\OT1/cmr/m/n/10.95 Figure 4: |APD410A2 Re-spon-siv-ity*M
  []
 
 [7 <./APD410A2edit.png>] [8]
-Overfull \hbox (1.84389pt too wide) in paragraph at lines 255--255
+Overfull \hbox (1.84389pt too wide) in paragraph at lines 260--260
 []|\OT1/cmr/m/n/12 06/15/2017| 
  []
 
 
-Underfull \hbox (badness 2443) in paragraph at lines 255--255
+Underfull \hbox (badness 2443) in paragraph at lines 260--260
 []|\OT1/cmr/m/n/12 Laser scan cen-ter: 797.8228nm, width:
  []
 
 
-Underfull \hbox (badness 2503) in paragraph at lines 255--256
-\OMS/cmsy/m/n/12 ^^X \OT1/cmr/m/n/12 275[]\OML/cmm/m/it/12 C$\OT1/cmr/m/n/12 . 
-Check that
- []
-
-
-Underfull \hbox (badness 4752) in paragraph at lines 255--256
-\OT1/cmr/m/n/12 stan-dard de-vi-a-tions were
- []
-
-
-Overfull \hbox (1.84389pt too wide) in paragraph at lines 257--257
+Overfull \hbox (1.84389pt too wide) in paragraph at lines 262--262
 []|\OT1/cmr/m/n/12 05/15/2017| 
  []
 
 
-Underfull \hbox (badness 2443) in paragraph at lines 257--257
+Underfull \hbox (badness 2443) in paragraph at lines 262--262
 []|\OT1/cmr/m/n/12 Laser scan cen-ter: 797.8228nm, width:
  []
 
 
-Overfull \hbox (1.84389pt too wide) in paragraph at lines 259--259
+Overfull \hbox (1.84389pt too wide) in paragraph at lines 264--264
 []|\OT1/cmr/m/n/12 12/05/2016| 
  []
 
 
-Overfull \hbox (1.84389pt too wide) in paragraph at lines 261--261
+Overfull \hbox (1.84389pt too wide) in paragraph at lines 266--266
 []|\OT1/cmr/m/n/12 10/06/2016| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
-\OT1/cmr/m/n/12 all mea-sure-ments per-
+Underfull \hbox (badness 1997) in paragraph at lines 266--267
+\OT1/cmr/m/n/12 per-formed at one lock-in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
-\OT1/cmr/m/n/12 formed at one lock-in
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
-\OT1/cmr/m/n/12 sen-si-tiv-ity, laser beam
- []
-
-
-Overfull \hbox (1.84389pt too wide) in paragraph at lines 263--263
+Overfull \hbox (1.84389pt too wide) in paragraph at lines 268--268
 []|\OT1/cmr/m/n/12 07/26/2016| 
  []
 
 
-Underfull \hbox (badness 7203) in paragraph at lines 263--263
+Underfull \hbox (badness 7203) in paragraph at lines 268--268
 \OT1/cmr/m/n/12 to ex-cite $[]\OML/cmm/m/it/12 P[]$\OT1/cmr/m/n/12 -$[]\OML/cmm
 /m/it/12 S[]$ \OT1/cmr/m/n/12 tran-si-tion (GRUVY,
  []
 
 
-Underfull \hbox (badness 4156) in paragraph at lines 263--264
+Underfull \hbox (badness 4156) in paragraph at lines 268--269
 []|\OT1/cmr/m/n/12 Data recorded by hand,
  []
 
 
-Underfull \hbox (badness 1052) in paragraph at lines 263--264
+Underfull \hbox (badness 1052) in paragraph at lines 268--269
 \OT1/cmr/m/n/12 tem-per-a-ture was not sta-
  []
 
 
-Underfull \hbox (badness 1975) in paragraph at lines 263--264
+Underfull \hbox (badness 1975) in paragraph at lines 268--269
 \OT1/cmr/m/n/12 ble dur-ing mea-sure-ments,
  []
 
 
-Overfull \hbox (16.22339pt too wide) in paragraph at lines 251--266
+Overfull \hbox (16.22339pt too wide) in paragraph at lines 256--271
 [][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 276--276
-[]|\OT1/cmr/m/n/12 Experimental
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 281--281
+[]|\OT1/cmr/bx/n/12 Experimental
  []
 
 
-Underfull \hbox (badness 2626) in paragraph at lines 280--280
-[]|\OT1/cmr/m/n/12 1) 2x10$[]$% 2)
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 282--282
-[]|\OT1/cmr/m/n/12 Detector ef-fi-
- []
-
-
-Underfull \hbox (badness 2707) in paragraph at lines 286--286
-[]|\OT1/cmr/m/n/12 Light col-lec-tion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 288--288
+Underfull \hbox (badness 10000) in paragraph at lines 283--283
 []|\OT1/cmr/m/n/12 1) 84.63% 2)
  []
 
 
-Underfull \hbox (badness 3302) in paragraph at lines 290--290
-[]|\OT1/cmr/m/n/12 Origin of pho-
+Underfull \hbox (badness 2707) in paragraph at lines 287--287
+[]|\OT1/cmr/m/n/12 Light col-lec-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--292
-[]|\OT1/cmr/m/n/12 Velocity of
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--296
-[]|\OT1/cmr/m/n/12 Laser beam
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--296
-\OT1/cmr/m/n/12 spec-tral dis-tri-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 298--298
+Underfull \hbox (badness 10000) in paragraph at lines 291--291
 []|\OT1/cmr/m/n/12 Atomic beam
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 300--300
+Underfull \hbox (badness 2626) in paragraph at lines 293--293
+[]|\OT1/cmr/m/n/12 1) 2x10$[]$% 2)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 296--296
+[]|\OT1/cmr/m/n/12 Velocity of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--298
+[]|\OT1/cmr/m/n/12 Detector ef-fi-
+ []
+
+
+Underfull \hbox (badness 3302) in paragraph at lines 302--302
+[]|\OT1/cmr/m/n/12 Origin of pho-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 304--304
+[]|\OT1/cmr/m/n/12 Laser beam
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 304--304
+\OT1/cmr/m/n/12 spec-tral dis-tri-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--306
 []|\OT1/cmr/m/n/12 Atom's line-
  []
 
-[9] [10] [11] [12] (./abf.bbl) [13] (./abf.aux) ) 
+[10] [11] [12] (./abf.bbl) [13] (./abf.aux) ) 
 Here is how much of TeX's memory you used:
- 3586 strings out of 493304
- 54355 string characters out of 6139870
- 124510 words of memory out of 5000000
- 6982 multiletter control sequences out of 15000+600000
+ 3588 strings out of 493304
+ 54392 string characters out of 6139870
+ 120555 words of memory out of 5000000
+ 6984 multiletter control sequences out of 15000+600000
  17892 words of font info for 71 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,11n,38p,1453b,335s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on abf.pdf (13 pages, 839613 bytes).
+ 38i,11n,38p,1452b,337s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/rsfs/rsfs10.pfb>
+Output written on abf.pdf (13 pages, 951821 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

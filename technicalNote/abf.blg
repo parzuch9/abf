@@ -6,45 +6,46 @@ Database file #1: references.bib
 Warning--entry type for "alcock" isn't style-file defined
 --line 1 of file references.bib
 Warning--empty title in das
-You've used 3 entries,
+Warning--empty title in laeter
+You've used 5 entries,
             1791 wiz_defined-function locations,
-            459 strings with 3701 characters,
-and the built_in function-call counts, 412 in all, are:
-= -- 30
-> -- 12
+            468 strings with 3878 characters,
+and the built_in function-call counts, 686 in all, are:
+= -- 52
+> -- 20
 < -- 0
-+ -- 6
-- -- 3
-* -- 13
-:= -- 72
-add.period$ -- 7
-call.type$ -- 3
++ -- 10
+- -- 5
+* -- 23
+:= -- 118
+add.period$ -- 12
+call.type$ -- 5
 change.case$ -- 1
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 23
-empty$ -- 52
-format.name$ -- 3
-if$ -- 91
+cite$ -- 7
+duplicate$ -- 41
+empty$ -- 85
+format.name$ -- 5
+if$ -- 153
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 16
-num.names$ -- 3
-pop$ -- 16
+int.to.str$ -- 5
+missing$ -- 6
+newline$ -- 25
+num.names$ -- 5
+pop$ -- 25
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 10
+skip$ -- 16
 stack$ -- 0
 substring$ -- 0
-swap$ -- 3
+swap$ -- 5
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 3
-width$ -- 4
-write$ -- 29
-(There were 2 warnings)
+warning$ -- 2
+while$ -- 5
+width$ -- 6
+write$ -- 48
+(There were 3 warnings)
